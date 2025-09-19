@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RTSP Camera Viewer</title>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .status-info {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .status-badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .status-connected {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .status-disconnected {
+            background: #f44336;
+            color: white;
+        }
+
+        .status-loading {
+            background: #ff9800;
+            color: white;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #2196F3;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1976D2;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #45a049;
+        }
+
+        .btn-danger {
+            background: #f44336;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #da190b;
+        }
+
+        .btn-warning {
+            background: #ff9800;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #f57c00;
+        }
+
+        .camera-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .camera-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .camera-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .camera-card.motion-detected {
+            border-color: #f44336;
+            animation: pulse-red 1s infinite;
+        }
+
+        @keyframes pulse-red {
+            0%, 100% { border-color: #f44336; box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7); }
+            50% { border-color: #ff5722; box-shadow: 0 0 0 10px rgba(244, 67, 54, 0); }
+        }
+
+        .camera-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .camera-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .camera-status {
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .status-active {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .status-inactive {
+            background: #9e9e9e;
+            color: white;
+        }
+
+        .status-error {
+            background: #f44336;
+            color: white;
+        }
+
+        .camera-info {
+            margin-bottom: 15px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .camera-info p {
+            margin: 5px 0;
+        }
+
+        .video-container {
+            position: relative;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-container img {
+            max-width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+        }
+
+        .video-placeholder {
+            color: #999;
+            font-size: 1.1em;
+            text-align: center;
+        }
+
+        .motion-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #f44336;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            display: none;
+        }
+
+        .motion-indicator.active {
+            display: block;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        .camera-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #f44336;
+        }
+
+        .success {
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #4caf50;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2196F3;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .camera-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .status-info {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎥 RTSP Camera Viewer</h1>
+        
+        <div class="controls">
+            <div class="status-info">
+                <div id="connection-status" class="status-badge status-disconnected">
+                    Desconectado
+                </div>
+                <div id="camera-count" class="status-badge status-loading">
+                    Cargando...
+                </div>
+            </div>
+            <div>
+                <button id="refresh-btn" class="btn btn-primary">🔄 Actualizar</button>
+                <button id="connect-all-btn" class="btn btn-success">▶️ Conectar Todas</button>
+                <button id="disconnect-all-btn" class="btn btn-danger">⏹️ Desconectar Todas</button>
+            </div>
+        </div>
+
+        <div class="stats" id="stats-container">
+            <div class="stat-card">
+                <div class="stat-number" id="total-cameras">0</div>
+                <div class="stat-label">Total Cámaras</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="active-cameras">0</div>
+                <div class="stat-label">Activas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="connected-cameras">0</div>
+                <div class="stat-label">Conectadas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="motion-detected">0</div>
+                <div class="stat-label">Con Movimiento</div>
+            </div>
+        </div>
+
+        <div id="loading" class="loading">
+            🔄 Cargando cámaras...
+        </div>
+
+        <div id="error-container"></div>
+
+        <div id="camera-grid" class="camera-grid" style="display: none;">
+            <!-- Las cámaras se cargarán aquí dinámicamente -->
+        </div>
+    </div>
+
+    <script>
+        class RTSPCameraClient {
+            constructor(serverUrl = 'http://localhost:8990') {
+                this.serverUrl = serverUrl;
+                this.socket = null;
+                this.cameras = new Map();
+                this.connectedCameras = new Set();
+                this.motionDetected = new Set();
+                this.isConnected = false;
+            }
+
+            async connect() {
+                try {
+                    this.socket = io(this.serverUrl);
+                    
+                    this.socket.on('connect', () => {
+                        console.log('✅ Conectado al servidor RTSP');
+                        this.isConnected = true;
+                        this.updateConnectionStatus();
+                        this.loadCameras();
+                    });
+
+                    this.socket.on('disconnect', () => {
+                        console.log('❌ Desconectado del servidor RTSP');
+                        this.isConnected = false;
+                        this.updateConnectionStatus();
+                    });
+
+                    this.socket.on('camera_list', (data) => {
+                        console.log('📋 Lista de cámaras recibida:', data);
+                        this.updateCameraList(data.cameras);
+                    });
+
+                    this.socket.on('frame_data', (data) => {
+                        this.displayFrame(data.camera_id, data.frame, data.motion_detected);
+                    });
+
+                    this.socket.on('joined_stream', (data) => {
+                        console.log(`✅ Conectado a stream: ${data.camera_id}`);
+                        this.connectedCameras.add(data.camera_id);
+                        this.updateCameraConnectionStatus(data.camera_id, true);
+                        this.updateStats();
+                    });
+
+                    this.socket.on('left_stream', (data) => {
+                        console.log(`❌ Desconectado de stream: ${data.camera_id}`);
+                        this.connectedCameras.delete(data.camera_id);
+                        this.updateCameraConnectionStatus(data.camera_id, false);
+                        this.updateStats();
+                    });
+
+                    this.socket.on('error', (error) => {
+                        console.error('❌ Error del servidor:', error);
+                        this.showError(`Error del servidor: ${error.message}`);
+                    });
+
+                } catch (error) {
+                    console.error('❌ Error conectando:', error);
+                    this.showError(`Error de conexión: ${error.message}`);
+                }
+            }
+
+            async getCameras() {
+                try {
+                    const response = await fetch(`${this.serverUrl}/api/v2/cameras`);
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    const data = await response.json();
+                    return data;
+                } catch (error) {
+                    console.error('❌ Error obteniendo cámaras:', error);
+                    throw error;
+                }
+            }
+
+            async loadCameras() {
+                try {
+                    const data = await this.getCameras();
+                    this.updateCameraList(data.cameras);
+                    this.updateStats();
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('camera-grid').style.display = 'grid';
+                } catch (error) {
+                    this.showError(`Error cargando cámaras: ${error.message}`);
+                    document.getElementById('loading').style.display = 'none';
+                }
+            }
+
+            async connectToCamera(cameraId) {
+                try {
+                    const camera = this.cameras.get(cameraId);
+                    if (!camera) {
+                        throw new Error(`Cámara ${cameraId} no encontrada`);
+                    }
+
+                    if (!camera.enabled) {
+                        throw new Error(`Cámara ${cameraId} está deshabilitada`);
+                    }
+
+                    this.socket.emit('join_camera_stream', { camera_id: cameraId });
+                    this.showSuccess(`Conectando a cámara: ${camera.name}`);
+
+                } catch (error) {
+                    console.error(`❌ Error conectando a cámara ${cameraId}:`, error);
+                    this.showError(`Error conectando a cámara: ${error.message}`);
+                }
+            }
+
+            async disconnectFromCamera(cameraId) {
+                try {
+                    this.socket.emit('leave_camera_stream', { camera_id: cameraId });
+                    const camera = this.cameras.get(cameraId);
+                    this.showSuccess(`Desconectando de cámara: ${camera?.name || cameraId}`);
+                } catch (error) {
+                    console.error(`❌ Error desconectando de cámara ${cameraId}:`, error);
+                }
+            }
+
+            displayFrame(cameraId, frameData, motionDetected) {
+                const videoElement = document.getElementById(`camera-${cameraId}`);
+                const motionIndicator = document.getElementById(`motion-${cameraId}`);
+                const cameraCard = document.getElementById(`card-${cameraId}`);
+
+                if (videoElement) {
+                    videoElement.src = `data:image/jpeg;base64,${frameData}`;
+                    videoElement.style.display = 'block';
+                    
+                    // Ocultar placeholder
+                    const placeholder = videoElement.parentElement.querySelector('.video-placeholder');
+                    if (placeholder) {
+                        placeholder.style.display = 'none';
+                    }
+                }
+
+                // Manejar detección de movimiento
+                if (motionDetected) {
+                    this.motionDetected.add(cameraId);
+                    if (motionIndicator) {
+                        motionIndicator.classList.add('active');
+                    }
+                    if (cameraCard) {
+                        cameraCard.classList.add('motion-detected');
+                    }
+                } else {
+                    this.motionDetected.delete(cameraId);
+                    if (motionIndicator) {
+                        motionIndicator.classList.remove('active');
+                    }
+                    if (cameraCard) {
+                        cameraCard.classList.remove('motion-detected');
+                    }
+                }
+
+                this.updateStats();
+            }
+
+            updateCameraList(cameras) {
+                const cameraGrid = document.getElementById('camera-grid');
+                cameraGrid.innerHTML = '';
+                this.cameras.clear();
+
+                cameras.forEach(camera => {
+                    this.cameras.set(camera.id, camera);
+                    const cameraElement = this.createCameraElement(camera);
+                    cameraGrid.appendChild(cameraElement);
+                });
+
+                this.updateStats();
+            }
+
+            createCameraElement(camera) {
+                const cameraDiv = document.createElement('div');
+                cameraDiv.className = 'camera-card';
+                cameraDiv.id = `card-${camera.id}`;
+
+                const statusClass = camera.status === 'active' ? 'status-active' : 
+                                  camera.status === 'error' ? 'status-error' : 'status-inactive';
+
+                cameraDiv.innerHTML = `
+                    <div class="camera-header">
+                        <div class="camera-title">${camera.name}</div>
+                        <div class="camera-status ${statusClass}">${camera.status}</div>
+                    </div>
+                    
+                    <div class="camera-info">
+                        <p><strong>ID:</strong> ${camera.id}</p>
+                        <p><strong>Ubicación:</strong> ${camera.location || 'No especificada'}</p>
+                        <p><strong>Resolución:</strong> ${camera.resolution || 'No especificada'}</p>
+                        <p><strong>FPS:</strong> ${camera.fps || 'No especificado'}</p>
+                        <p><strong>Habilitada:</strong> ${camera.enabled ? '✅ Sí' : '❌ No'}</p>
+                    </div>
+                    
+                    <div class="video-container">
+                        <img id="camera-${camera.id}" alt="${camera.name}" style="display: none;" />
+                        <div class="video-placeholder">📹 Cámara desconectada</div>
+                        <div id="motion-${camera.id}" class="motion-indicator">🚨 MOVIMIENTO</div>
+                    </div>
+                    
+                    <div class="camera-controls">
+                        <button class="btn btn-success" onclick="connectToCamera('${camera.id}')" 
+                                ${!camera.enabled ? 'disabled' : ''}>
+                            ▶️ Conectar
+                        </button>
+                        <button class="btn btn-danger" onclick="disconnectFromCamera('${camera.id}')">
+                            ⏹️ Desconectar
+                        </button>
+                        <button class="btn btn-warning" onclick="testCamera('${camera.id}')">
+                            🔧 Probar
+                        </button>
+                    </div>
+                `;
+
+                return cameraDiv;
+            }
+
+            updateConnectionStatus() {
+                const statusElement = document.getElementById('connection-status');
+                if (this.isConnected) {
+                    statusElement.textContent = 'Conectado';
+                    statusElement.className = 'status-badge status-connected';
+                } else {
+                    statusElement.textContent = 'Desconectado';
+                    statusElement.className = 'status-badge status-disconnected';
+                }
+            }
+
+            updateCameraConnectionStatus(cameraId, connected) {
+                const placeholder = document.querySelector(`#card-${cameraId} .video-placeholder`);
+                if (placeholder) {
+                    placeholder.textContent = connected ? '📹 Conectado - Esperando frames...' : '📹 Cámara desconectada';
+                }
+            }
+
+            updateStats() {
+                const totalCameras = this.cameras.size;
+                const activeCameras = Array.from(this.cameras.values()).filter(c => c.status === 'active').length;
+                const connectedCameras = this.connectedCameras.size;
+                const motionDetected = this.motionDetected.size;
+
+                document.getElementById('total-cameras').textContent = totalCameras;
+                document.getElementById('active-cameras').textContent = activeCameras;
+                document.getElementById('connected-cameras').textContent = connectedCameras;
+                document.getElementById('motion-detected').textContent = motionDetected;
+
+                // Actualizar contador en controles
+                const cameraCount = document.getElementById('camera-count');
+                cameraCount.textContent = `${totalCameras} cámaras`;
+                cameraCount.className = 'status-badge status-connected';
+            }
+
+            showError(message) {
+                const errorContainer = document.getElementById('error-container');
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error';
+                errorDiv.innerHTML = `❌ ${message}`;
+                errorContainer.appendChild(errorDiv);
+
+                // Remover después de 5 segundos
+                setTimeout(() => {
+                    errorDiv.remove();
+                }, 5000);
+            }
+
+            showSuccess(message) {
+                const errorContainer = document.getElementById('error-container');
+                const successDiv = document.createElement('div');
+                successDiv.className = 'success';
+                successDiv.innerHTML = `✅ ${message}`;
+                errorContainer.appendChild(successDiv);
+
+                // Remover después de 3 segundos
+                setTimeout(() => {
+                    successDiv.remove();
+                }, 3000);
+            }
+
+            async connectAllCameras() {
+                const enabledCameras = Array.from(this.cameras.values()).filter(c => c.enabled);
+                for (const camera of enabledCameras) {
+                    await this.connectToCamera(camera.id);
+                    // Pequeña pausa entre conexiones
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                }
+            }
+
+            async disconnectAllCameras() {
+                for (const cameraId of this.connectedCameras) {
+                    await this.disconnectFromCamera(cameraId);
+                }
+            }
+
+            async testCamera(cameraId) {
+                try {
+                    const response = await fetch(`${this.serverUrl}/api/v2/cameras/${cameraId}/test`, {
+                        method: 'POST'
+                    });
+                    const result = await response.json();
+                    
+                    if (result.connection_test === 'success') {
+                        this.showSuccess(`Prueba exitosa para cámara: ${result.camera_name}`);
+                    } else {
+                        this.showError(`Prueba fallida para cámara: ${result.camera_name} - ${result.error || 'Error desconocido'}`);
+                    }
+                } catch (error) {
+                    this.showError(`Error probando cámara: ${error.message}`);
+                }
+            }
+        }
+
+        // Instancia global del cliente
+        const client = new RTSPCameraClient();
+
+        // Funciones globales para los botones
+        async function connectToCamera(cameraId) {
+            await client.connectToCamera(cameraId);
+        }
+
+        async function disconnectFromCamera(cameraId) {
+            await client.disconnectFromCamera(cameraId);
+        }
+
+        async function testCamera(cameraId) {
+            await client.testCamera(cameraId);
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Conectar al servidor
+            client.connect();
+
+            // Botón de actualizar
+            document.getElementById('refresh-btn').addEventListener('click', () => {
+                client.loadCameras();
+            });
+
+            // Botón conectar todas
+            document.getElementById('connect-all-btn').addEventListener('click', () => {
+                client.connectAllCameras();
+            });
+
+            // Botón desconectar todas
+            document.getElementById('disconnect-all-btn').addEventListener('click', () => {
+                client.disconnectAllCameras();
+            });
+        });
+
+        // Manejar errores globales
+        window.addEventListener('error', (event) => {
+            console.error('❌ Error global:', event.error);
+            client.showError(`Error de aplicación: ${event.error.message}`);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,405 @@
+api:
+  listen: ":1984"
+  origin: '*'
+
+rtsp:
+  listen: ":1917"
+  origin: '*'  
+
+log:
+  level: info
+
+webrtc:
+  # Configuración básica soportada por go2rtc
+  listen: ":8899"
+  
+  # Servidores ICE (FUNCIONAL)
+  ice_servers:
+    # Múltiples servidores STUN para descubrimiento NAT
+    - urls:
+      - stun:stun.l.google.com:19302
+      - stun:stun1.l.google.com:19302
+      - stun:stun2.l.google.com:19302
+    # Tu servidor TURN local (PRIORITARIO)
+    - urls:
+      - turn:97.68.156.139:3478
+      username: "testuser"
+      credential: "testpassword"
+    # Servidores TURN de respaldo públicos
+    - urls:
+      - turn:openrelay.metered.ca:80
+      username: "openrelayproject"
+      credential: "openrelayproject"
+    - urls:
+      - turn:openrelay.metered.ca:443
+      username: "openrelayproject"  
+      credential: "openrelayproject"
+  trickle_ice: true
+  origin: '*'
+  sdp_bandwidth: 15000       # Aumentar ancho de banda
+      
+ffmpeg:
+  bin: ffmpeg
+  threads: 2
+  h264: -c:v libx264 -preset:v ultrafast -tune:v zerolatency -profile:v baseline -b:v 384k -r:v 5 -g:v 5 -an
+  h264H: -codec:v libx264 -preset:v ultrafast -tune:v zerolatency -profile:v baseline -b:v 1024k-r:v 15 -g:v 15 -an
+  h264code: -c:v libx264 -preset:v ultrafast -tune:v zerolatency -profile:v baseline -b:v 384k -r:v 5 -g:v 5 -c:d h264 -c:s libx265 -an
+  h264Hcode: -c:v libx264 -preset:v ultrafast -tune:v zerolatency -profile:v baseline -b:v 1024k -r:v 15 -g:v 15 -c:d h264 -c:s libx265 -an
+
+streams:
+  '1':
+  - rtsp://admin:Sec7442019@192.168.1.1:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  1HD:
+  - rtsp://admin:Sec7442019@192.168.1.1:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '10':
+  - rtsp://admin:Sec7442019@192.168.1.10:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  10HD:
+  - rtsp://admin:Sec7442019@192.168.1.10:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '11':
+  - rtsp://admin:Sec7442019@192.168.1.11:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  11HD:
+  - rtsp://admin:Sec7442019@192.168.1.11:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '12':
+  - rtsp://admin:Sec7442019@192.168.1.12:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  12HD:
+  - rtsp://admin:Sec7442019@192.168.1.12:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '13':
+  - rtsp://admin:Sec7442019@192.168.1.13:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  13HD:
+  - rtsp://admin:Sec7442019@192.168.1.13:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '14':
+  - rtsp://admin:Sec7442019@192.168.1.14:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  14HD:
+  - rtsp://admin:Sec7442019@192.168.1.14:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '16':
+  - rtsp://admin:Sec7442019@192.168.1.16:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  16-2:
+  - rtsp://admin:Sec7442019@192.168.1.16:554/cam/realmonitor?channel=2&subtype=1#bitrate=192k&fps=5
+  16-2HD:
+  - rtsp://admin:Sec7442019@192.168.1.16:554/cam/realmonitor?channel=2&subtype=0#bitrate=1024k&fps=15
+  16HD:
+  - rtsp://admin:Sec7442019@192.168.1.16:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '17':
+  - rtsp://admin:Sec7442019@192.168.1.17:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  17-2:
+  - rtsp://admin:Sec7442019@192.168.1.17:554/cam/realmonitor?channel=2&subtype=1#bitrate=192k&fps=5
+  17-2HD:
+  - rtsp://admin:Sec7442019@192.168.1.17:554/cam/realmonitor?channel=2&subtype=0#bitrate=1024k&fps=15
+  '171':
+  - rtsp://admin:Sec7442019@192.168.1.171:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  171HD:
+  - rtsp://admin:Sec7442019@192.168.1.171:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  17HD:
+  - rtsp://admin:Sec7442019@192.168.1.17:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '18':
+  - rtsp://admin:Sec7442019@192.168.1.18:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  18HD:
+  - rtsp://admin:Sec7442019@192.168.1.18:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '19':
+  - rtsp://admin:Sec7442019@192.168.1.19:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  19HD:
+  - rtsp://admin:Sec7442019@192.168.1.19:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '2':
+  - rtsp://admin:Sec7442019@192.168.1.2:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  '20':
+  - rtsp://admin:Sec7442019@192.168.1.20:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  20HD:
+  - rtsp://admin:Sec7442019@192.168.1.20:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '21':
+  - rtsp://admin:Sec7442019@192.168.1.21:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  21HD:
+  - rtsp://admin:Sec7442019@192.168.1.21:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '22':
+  - rtsp://admin:Sec7442019@192.168.1.22:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  22HD:
+  - rtsp://admin:Sec7442019@192.168.1.22:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '23':
+  - rtsp://admin:Sec7442019@192.168.1.23:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  23HD:
+  - rtsp://admin:Sec7442019@192.168.1.23:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '24':
+  - rtsp://admin:Sec7442019@192.168.1.24:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  24-2:
+  - rtsp://admin:Sec7442019@192.168.1.24:554/cam/realmonitor?channel=2&subtype=1#bitrate=192k&fps=5
+  24-2HD:
+  - rtsp://admin:Sec7442019@192.168.1.24:554/cam/realmonitor?channel=2&subtype=0#bitrate=1024k&fps=15
+  24HD:
+  - rtsp://admin:Sec7442019@192.168.1.24:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '25':
+  - rtsp://admin:Sec7442019@192.168.1.25:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  25HD:
+  - rtsp://admin:Sec7442019@192.168.1.25:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '26':
+  - rtsp://admin:Sec7442019@192.168.1.26/12#audio=none#bitrate=192k&fps=5
+  26HD:
+  - rtsp://admin:Sec7442019@192.168.1.26/11#audio=none#bitrate=192k&fps=5
+  '27':
+  - rtsp://admin:Sec7442019@192.168.1.27:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  27HD:
+  - rtsp://admin:Sec7442019@192.168.1.27:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '28':
+  - rtsp://admin:Sec7442019@192.168.1.28:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  28HD:
+  - rtsp://admin:Sec7442019@192.168.1.28:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '29':
+  - rtsp://admin:Sec7442019@192.168.1.29:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  29-2:
+  - rtsp://admin:Sec7442019@192.168.1.29:554/cam/realmonitor?channel=2&subtype=1#bitrate=192k&fps=5
+  29-2HD:
+  - rtsp://admin:Sec7442019@192.168.1.29:554/cam/realmonitor?channel=2&subtype=0#bitrate=1024k&fps=15
+  29HD:
+  - rtsp://admin:Sec7442019@192.168.1.29:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  2HD:
+  - rtsp://admin:Sec7442019@192.168.1.2:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '3':
+  - rtsp://admin:Sec7442019@192.168.1.3:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  '30':
+  - rtsp://admin:Sec7442019@192.168.1.30:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  30-2:
+  - rtsp://admin:Sec7442019@192.168.1.30:554/cam/realmonitor?channel=2&subtype=1#bitrate=192k&fps=5
+  30-2HD:
+  - rtsp://admin:Sec7442019@192.168.1.30:554/cam/realmonitor?channel=2&subtype=0#bitrate=1024k&fps=15
+  30HD:
+  - rtsp://admin:Sec7442019@192.168.1.30:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '31':
+  - rtsp://admin:Sec7442019@192.168.1.31:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  31HD:
+  - rtsp://admin:Sec7442019@192.168.1.31:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '32':
+  - rtsp://192.168.1.32:554/12
+  32HD:
+  - rtsp://admin:221164@192.168.1.32/11
+  '34':
+  - rtsp://admin:password@192.168.1.34/12#audio=none#bitrate=192k&fps=5
+  34HD:
+  - rtsp://admin:password@192.168.1.34/11#audio=none#bitrate=192k&fps=5
+  '35':
+  - rtsp://admin:Sec7442019@192.168.1.35:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  35HD:
+  - rtsp://admin:Sec7442019@192.168.1.35:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '36':
+  - rtsp://admin:Sec7442019@192.168.1.36/12#audio=none#bitrate=192k&fps=5
+  36HD:
+  - rtsp://admin:Sec7442019@192.168.1.36/11#audio=none#bitrate=192k&fps=5
+  '37':
+  - rtsp://admin:Sec7442019@192.168.1.37/12#audio=none#bitrate=192k&fps=5
+  37HD:
+  - rtsp://admin:Sec7442019@192.168.1.37/11#audio=none#bitrate=192k&fps=5
+  '38':
+  - rtsp://admin:password@192.168.1.38:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  38HD:
+  - rtsp://admin:password@192.168.1.38:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '39':
+  - rtsp://admin:password@192.168.1.39:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  39HD:
+  - rtsp://admin:password@192.168.1.39:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  3HD:
+  - rtsp://admin:Sec7442019@192.168.1.3:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '4':
+  - rtsp://admin:Sec7442019@192.168.1.4:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  '40':
+  - rtsp://admin:Sec7442019@192.168.1.40:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  40HD:
+  - rtsp://admin:Sec7442019@192.168.1.40:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '41':
+  - rtsp://admin:Sec7442019@192.168.1.41:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  41HD:
+  - rtsp://admin:Sec7442019@192.168.1.41:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '42':
+  - rtsp://admin:Sec7442019@192.168.1.42:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  42HD:
+  - rtsp://admin:Sec7442019@192.168.1.42:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '43':
+  - rtsp://admin:Sec7442019@192.168.1.43:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  43HD:
+  - rtsp://admin:Sec7442019@192.168.1.43:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '44':
+  - rtsp://admin:Sec7442019@192.168.1.44:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  44HD:
+  - rtsp://admin:Sec7442019@192.168.1.44:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '45':
+  - rtsp://admin:Sec7442019@192.168.1.45:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  45HD:
+  - rtsp://admin:Sec7442019@192.168.1.45:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '46':
+  - rtsp://admin:Sec7442019@192.168.1.46:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  46HD:
+  - rtsp://admin:Sec7442019@192.168.1.46:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '47':
+  - rtsp://admin:Sec7442019@192.168.1.47:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  47HD:
+  - rtsp://admin:Sec7442019@192.168.1.47:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '48':
+  - rtsp://admin:Sec7442019@192.168.1.48:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  48HD:
+  - rtsp://admin:Sec7442019@192.168.1.48:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '49':
+  - rtsp://admin:Sec7442019@192.168.1.49:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  49HD:
+  - rtsp://admin:Sec7442019@192.168.1.49:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  4HD:
+  - rtsp://admin:Sec7442019@192.168.1.4:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '5':
+  - rtsp://admin:Sec7442019@192.168.1.5:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  5-2:
+  - rtsp://admin:Sec7442019@192.168.1.5:554/cam/realmonitor?channel=2&subtype=1#bitrate=192k&fps=5
+  5-2HD:
+  - rtsp://admin:Sec7442019@192.168.1.5:554/cam/realmonitor?channel=2&subtype=0#bitrate=1024k&fps=15
+  '50':
+  - rtsp://admin:Sec7442019@192.168.1.50:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  50-2:
+  - rtsp://admin:Sec7442019@192.168.1.50:554/cam/realmonitor?channel=2&subtype=1#bitrate=192k&fps=5
+  50-2HD:
+  - rtsp://admin:Sec7442019@192.168.1.50:554/cam/realmonitor?channel=2&subtype=0#bitrate=1024k&fps=15
+  50HD:
+  - rtsp://admin:Sec7442019@192.168.1.50:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '52':
+  - rtsp://admin:Sec7442019@192.168.1.52:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  52HD:
+  - rtsp://admin:Sec7442019@192.168.1.52:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '53':
+  - rtsp://admin:Sec7442019@192.168.1.53:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  53HD:
+  - rtsp://admin:Sec7442019@192.168.1.53:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '54':
+  - rtsp://admin:Sec7442019@192.168.1.54:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  54HD:
+  - rtsp://admin:Sec7442019@192.168.1.54:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '55':
+  - rtsp://admin:Sec7442019@192.168.1.55:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  55HD:
+  - rtsp://admin:Sec7442019@192.168.1.55:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '56':
+  - rtsp://admin:Sec7442019@192.168.1.56:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  56HD:
+  - rtsp://admin:Sec7442019@192.168.1.56:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '57':
+  - rtsp://admin:Sec7442019@192.168.1.57:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  57-2:
+  - rtsp://admin:Sec7442019@192.168.1.57:554/cam/realmonitor?channel=2&subtype=1#bitrate=192k&fps=5
+  57-2HD:
+  - rtsp://admin:Sec7442019@192.168.1.57:554/cam/realmonitor?channel=2&subtype=0#bitrate=1024k&fps=15
+  57HD:
+  - rtsp://admin:Sec7442019@192.168.1.57:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '59':
+  - rtsp://admin:Sec7442019@192.168.1.59:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  59HD:
+  - rtsp://admin:Sec7442019@192.168.1.59:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  5HD:
+  - rtsp://admin:Sec7442019$@192.168.1.5:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '6':
+  - rtsp://admin:Sec7442019@192.168.1.6:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  '60':
+  - rtsp://admin:Sec7442019@192.168.1.60:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  60-2:
+  - rtsp://admin:Sec7442019@192.168.1.60:554/cam/realmonitor?channel=2&subtype=1#bitrate=192k&fps=5
+  60-2HD:
+  - rtsp://admin:Sec7442019@192.168.1.60:554/cam/realmonitor?channel=2&subtype=0#bitrate=1024k&fps=15
+  60HD:
+  - rtsp://admin:Sec7442019@192.168.1.60:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '62':
+  - rtsp://admin:Sec7442019@192.168.1.62:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  62HD:
+  - rtsp://admin:Sec7442019@192.168.1.62:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '63':
+  - rtsp://admin:Sec7442019@192.168.1.63:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  63HD:
+  - rtsp://admin:Sec7442019@192.168.1.63:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '64':
+  - rtsp://admin:Sec7442019@192.168.1.64:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  64HD:
+  - rtsp://admin:Sec7442019@192.168.1.64:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '65':
+  - rtsp://admin:Sec7442019@192.168.1.65:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  65HD:
+  - rtsp://admin:Sec7442019@192.168.1.65:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '66':
+  - rtsp://admin:Sec7442019@192.168.1.66:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  66HD:
+  - rtsp://admin:Sec7442019@192.168.1.66:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '67':
+  - rtsp://admin:Sec7442019@192.168.1.67:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  67HD:
+  - rtsp://admin:Sec7442019@192.168.1.67:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '68':
+  - rtsp://admin:Sec7442019@192.168.1.68:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  68-2:
+  - rtsp://admin:Sec7442019@192.168.1.68:554/cam/realmonitor?channel=2&subtype=1#bitrate=192k&fps=5
+  68-2HD:
+  - rtsp://admin:Sec7442019@192.168.1.68:554/cam/realmonitor?channel=2&subtype=0#bitrate=1024k&fps=15
+  68HD:
+  - rtsp://admin:Sec7442019@192.168.1.68:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  6HD:
+  - rtsp://admin:Sec7442019@192.168.1.6:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '7':
+  - rtsp://admin:Sec7442019@192.168.1.7:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  '70':
+  - rtsp://admin:Sec7442019@192.168.1.70:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  70-2:
+  - rtsp://admin:Sec7442019@192.168.1.70:554/cam/realmonitor?channel=2&subtype=1#bitrate=192k&fps=5
+  70-2HD:
+  - rtsp://admin:Sec7442019@192.168.1.70:554/cam/realmonitor?channel=2&subtype=0#bitrate=1024k&fps=15
+  70HD:
+  - rtsp://admin:Sec7442019@192.168.1.70:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '72':
+  - rtsp://admin:Sec7442019@192.168.1.72:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  72HD:
+  - rtsp://admin:Sec7442019@192.168.1.72:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '73':
+  - rtsp://192.168.1.73:554/11#audio=none#bitrate=192k&fps=5
+  73HD:
+  - rtsp://192.168.1.73:554/12#audio=none#bitrate=192k&fps=5
+  '74':
+  - rtsp://192.168.1.74:554/11#audio=none#bitrate=192k&fps=5
+  74HD:
+  - rtsp://192.168.1.74:554/12#audio=none#bitrate=192k&fps=5
+  '75':
+  - rtsp://admin:Sec7442019@192.168.1.75:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  75HD:
+  - rtsp://admin:Sec7442019@192.168.1.75:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '76':
+  - rtsp://admin:Sec7442019@192.168.1.76:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  76-2:
+  - rtsp://admin:Sec7442019@192.168.1.76:554/cam/realmonitor?channel=2&subtype=1#bitrate=192k&fps=5
+  76-2HD:
+  - rtsp://admin:Sec7442019@192.168.1.76:554/cam/realmonitor?channel=2&subtype=0#bitrate=1024k&fps=15
+  76HD:
+  - rtsp://admin:Sec7442019@192.168.1.76:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '78':
+  - rtsp://admin:Sec7442019@192.168.1.78:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  78-2:
+  - rtsp://admin:Sec7442019@192.168.1.78:554/cam/realmonitor?channel=2&subtype=1#bitrate=192k&fps=5
+  78-2HD:
+  - rtsp://admin:Sec7442019@192.168.1.78:554/cam/realmonitor?channel=2&subtype=0#bitrate=1024k&fps=15
+  78HD:
+  - rtsp://admin:Sec7442019@192.168.1.78:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  7HD:
+  - rtsp://admin:Sec7442019@192.168.1.7:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '8':
+  - rtsp://admin:Sec7442019@192.168.1.8:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  '80':
+  - rtsp://admin:Sec7442019@192.168.1.80:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  80-2:
+  - rtsp://admin:Sec7442019@192.168.1.80:554/cam/realmonitor?channel=2&subtype=1#bitrate=192k&fps=5
+  80-2HD:
+  - rtsp://admin:Sec7442019@192.168.1.80:554/cam/realmonitor?channel=2&subtype=0#bitrate=1024k&fps=15
+  80-3:
+  - rtsp://admin:Sec7442019@192.168.1.80:554/cam/realmonitor?channel=3&subtype=1#bitrate=192k&fps=5
+  80-3HD:
+  - rtsp://admin:Sec7442019@192.168.1.80:554/cam/realmonitor?channel=3&subtype=0#bitrate=1024k&fps=15
+  80-4:
+  - rtsp://admin:Sec7442019@192.168.1.80:554/cam/realmonitor?channel=4&subtype=1#bitrate=192k&fps=5
+  80-4HD:
+  - rtsp://admin:Sec7442019@192.168.1.80:554/cam/realmonitor?channel=4&subtype=0#bitrate=1024k&fps=15
+  80HD:
+  - rtsp://admin:Sec7442019@192.168.1.80:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  8HD:
+  - rtsp://admin:Sec7442019@192.168.1.8:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15
+  '9':
+  - rtsp://admin:Sec7442019@192.168.1.9:554/cam/realmonitor?channel=1&subtype=1#bitrate=192k&fps=5
+  9-2:
+  - rtsp://admin:Sec7442019@192.168.1.9:554/cam/realmonitor?channel=2&subtype=1#bitrate=192k&fps=5
+  9-2HD:
+  - rtsp://admin:Sec7442019@192.168.1.9:554/cam/realmonitor?channel=2&subtype=0#bitrate=1024k&fps=15
+  9HD:
+  - rtsp://admin:Sec7442019@192.168.1.9:554/cam/realmonitor?channel=1&subtype=0#bitrate=1024k&fps=15

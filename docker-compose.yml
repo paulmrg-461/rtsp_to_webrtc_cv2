@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  rtsp-to-webrtc:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rtsp_to_webrtc_app
+    ports:
+      - "8990:8990"
+    volumes:
+      - ./videos:/app/videos
+      - ./output:/app/output
+      - ./streams:/app/streams
+      - ./logs:/app/logs
+      - ./src:/app/src
+      - ./static:/app/static
+      - ./.env:/app/.env
+    env_file:
+      - .env
+    environment:
+      - PYTHONPATH=/app
+      - LOG_LEVEL=INFO
+      - APP_HOST=0.0.0.0
+      - APP_PORT=8990
+      - TZ=America/Bogota
+    restart: unless-stopped
+    networks:
+      - rtsp-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8990/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Servicio opcional para base de datos si se necesita persistencia
+  # postgres:
+  #   image: postgres:15
+  #   container_name: rtsp_webrtc_db
+  #   environment:
+  #     POSTGRES_DB: rtsp_webrtc
+  #     POSTGRES_USER: admin
+  #     POSTGRES_PASSWORD: password
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  #   networks:
+  #     - rtsp-network
+
+  # Servicio opcional para Redis si se necesita cache
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: rtsp_webrtc_redis
+  #   ports:
+  #     - "6379:6379"
+  #   networks:
+  #     - rtsp-network
+  #   command: redis-server --appendonly yes
+  #   volumes:
+  #     - redis_data:/data
+
+networks:
+  rtsp-network:
+    driver: bridge
+
+# volumes:
+#   postgres_data:
+#   redis_data:
