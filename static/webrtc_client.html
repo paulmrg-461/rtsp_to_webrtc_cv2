@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cliente WebRTC - Pruebas (WebCam y RTSP)</title>
+  <style>
+    body { font-family: Inter, Arial, sans-serif; margin: 0; padding: 24px; background: #0f172a; color: #e2e8f0; }
+    h1 { margin: 0 0 8px; font-size: 22px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .card { background: #111827; border: 1px solid #1f2937; border-radius: 10px; padding: 16px; }
+    .controls { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+    button { background: #2563eb; color: white; border: none; border-radius: 8px; padding: 10px 14px; cursor: pointer; font-weight: 600; }
+    button.secondary { background: #374151; }
+    button.danger { background: #ef4444; }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
+    select, input { background: #0b1220; color: #e2e8f0; border: 1px solid #1f2937; border-radius: 6px; padding: 8px; }
+    video { width: 100%; max-height: 320px; background: #000; border-radius: 8px; }
+    .log { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; background: #0b1220; border: 1px solid #1f2937; border-radius: 8px; padding: 12px; height: 160px; overflow: auto; }
+    .badge { display: inline-flex; align-items: center; gap: 8px; background: #0b1220; border: 1px solid #1f2937; border-radius: 999px; padding: 8px 12px; font-size: 12px; }
+    .ok { color: #10b981; }
+    .warn { color: #f59e0b; }
+    .err { color: #ef4444; }
+  </style>
+</head>
+<body>
+  <h1>Cliente WebRTC (WebCam → WebRTC y RTSP → WebRTC)</h1>
+  <p class="badge">API: <strong>/api/streaming/webrtc</strong> · Docker Compose activo · Puerto 8990</p>
+
+  <div class="grid">
+    <div class="card">
+      <h2>WebCam Local</h2>
+      <video id="localVideo" playsinline autoplay muted></video>
+      <div class="controls">
+        <button id="startCamBtn">Iniciar WebCam</button>
+        <button id="stopCamBtn" class="secondary">Detener WebCam</button>
+      </div>
+      <p id="camStatus">Estado: sin capturar</p>
+    </div>
+
+    <div class="card">
+      <h2>Stream remoto (WebRTC)</h2>
+      <video id="remoteVideo" playsinline autoplay></video>
+      <div class="controls">
+        <select id="cameraSelect">
+          <option value="">Seleccionar cámara...</option>
+        </select>
+        <button id="connectBtn">Conectar WebRTC</button>
+        <button id="sendCamBtn" class="secondary" disabled>Enviar WebCam</button>
+        <button id="disconnectBtn" class="danger" disabled>Desconectar</button>
+      </div>
+      <p id="rtcStatus">Estado WebRTC: desconectado</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h2>Logs</h2>
+    <div id="log" class="log"></div>
+  </div>
+
+<script>
+  // Configuración dinámica de ICE desde el servidor (soporta STUN/TURN)
+  let rtcConfig = { iceServers: [{ urls: ['stun:stun.l.google.com:19302'] }] };
+  async function loadRtcConfig() {
+    try {
+      const res = await fetch('/api/streaming/webrtc/config');
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.iceServers) {
+          rtcConfig = { iceServers: data.iceServers.map((entry) => {
+            if (typeof entry === 'string') return { urls: [entry] };
+            if (Array.isArray(entry)) return { urls: entry };
+            if (typeof entry === 'object' && entry) {
+              const urls = entry.urls || entry.url || [];
+              const obj = { urls: Array.isArray(urls) ? urls : [urls] };
+              if (entry.username) obj.username = entry.username;
+              if (entry.credential) obj.credential = entry.credential;
+              return obj;
+            }
+            return { urls: ['stun:stun.l.google.com:19302'] };
+          }) };
+          log('ICE config cargada desde servidor', 'success');
+        }
+      }
+    } catch (e) { log('No se pudo cargar ICE config del servidor: ' + e.message, 'warn'); }
+  }
+
+  let pc = null;          // RTCPeerConnection
+  let localStream = null; // MediaStream de la WebCam
+  let connectionId = null;
+  let webcamTracksSent = false; // Evita enviar las mismas tracks más de una vez
+
+  const logEl = document.getElementById('log');
+  const localVideo = document.getElementById('localVideo');
+  const remoteVideo = document.getElementById('remoteVideo');
+  const cameraSelect = document.getElementById('cameraSelect');
+  const startCamBtn = document.getElementById('startCamBtn');
+  const stopCamBtn = document.getElementById('stopCamBtn');
+  const connectBtn = document.getElementById('connectBtn');
+  const sendCamBtn = document.getElementById('sendCamBtn');
+  const disconnectBtn = document.getElementById('disconnectBtn');
+  const camStatusEl = document.getElementById('camStatus');
+  const rtcStatusEl = document.getElementById('rtcStatus');
+
+  function log(msg, type = 'info') {
+    const color = type === 'success' ? 'ok' : type === 'warn' ? 'warn' : type === 'error' ? 'err' : '';
+    const time = new Date().toLocaleTimeString();
+    const line = document.createElement('div');
+    line.innerHTML = `<span class="${color}">[${time}]</span> ${msg}`;
+    logEl.appendChild(line);
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  async function startWebCam() {
+    try {
+      localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+      localVideo.srcObject = localStream;
+      camStatusEl.textContent = 'Estado: cámara activa';
+      log('WebCam iniciada', 'success');
+    } catch (err) {
+      log(`Error iniciando WebCam: ${err.message}`, 'error');
+    }
+  }
+
+  function stopWebCam() {
+    if (localStream) {
+      localStream.getTracks().forEach(t => t.stop());
+      localStream = null;
+      localVideo.srcObject = null;
+      webcamTracksSent = false; // Permitir reenvío cuando se reinicie la cámara
+      camStatusEl.textContent = 'Estado: sin capturar';
+      log('WebCam detenida', 'warn');
+    }
+  }
+
+  async function connectWebRTC() {
+    try {
+      rtcStatusEl.textContent = 'Estado WebRTC: conectando…';
+      connectBtn.disabled = true; disconnectBtn.disabled = true; sendCamBtn.disabled = true;
+
+      await loadRtcConfig();
+      pc = new RTCPeerConnection(rtcConfig);
+      pc.addEventListener('iceconnectionstatechange', () => {
+        log('ICE state: ' + pc.iceConnectionState, pc.iceConnectionState === 'failed' ? 'error' : 'info');
+        if (pc.iceConnectionState === 'failed') {
+          rtcStatusEl.textContent = 'Estado WebRTC: desconectado';
+        }
+      });
+
+      pc.onicecandidate = async (e) => {
+        if (e.candidate && connectionId) {
+          try {
+            await fetch('/api/streaming/webrtc/ice-candidate', {
+              method: 'POST', headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ connection_id: connectionId, candidate: e.candidate })
+            });
+          } catch (err) { log(`Error enviando ICE: ${err.message}`, 'error'); }
+        }
+      };
+
+      pc.ontrack = async (event) => {
+        remoteVideo.srcObject = event.streams[0];
+        try { await remoteVideo.play(); } catch (e) { /* ignore */ }
+        rtcStatusEl.textContent = 'Estado WebRTC: conectado (stream remoto)';
+        log('Track remoto recibido', 'success');
+      };
+
+      pc.onconnectionstatechange = () => {
+        log(`RTCPeerConnection: ${pc.connectionState}`);
+        if (pc.connectionState === 'connected') {
+          disconnectBtn.disabled = false; sendCamBtn.disabled = !localStream;
+        }
+        if (pc.connectionState === 'failed' || pc.connectionState === 'disconnected') {
+          rtcStatusEl.textContent = 'Estado WebRTC: desconectado';
+        }
+      };
+
+      // Solicitar oferta del servidor para la cámara seleccionada
+      const camId = cameraSelect.value;
+      if (!camId) {
+        rtcStatusEl.textContent = 'Estado WebRTC: seleccione una cámara';
+        log('Selecciona una cámara antes de conectar.', 'warn');
+        connectBtn.disabled = false;
+        return;
+      }
+      const offerResp = await fetch('/api/streaming/webrtc/offer', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ camera_id: camId })
+      });
+      const offerData = await offerResp.json();
+      connectionId = offerData.connection_id;
+
+      // Establecer descripción remota (SDP del servidor)
+      await pc.setRemoteDescription(offerData.offer);
+
+      // Si ya tenemos WebCam activa, agregamos las tracks ANTES de crear el answer
+      if (localStream && !webcamTracksSent) {
+        localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
+        webcamTracksSent = true;
+        sendCamBtn.disabled = true;
+        log('Tracks de WebCam agregadas a la conexión', 'info');
+      }
+
+      const answer = await pc.createAnswer();
+      await pc.setLocalDescription(answer);
+
+      await fetch('/api/streaming/webrtc/answer', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ connection_id: connectionId, sdp: answer.sdp, type: answer.type })
+      });
+
+      rtcStatusEl.textContent = 'Estado WebRTC: conectado';
+      disconnectBtn.disabled = false; sendCamBtn.disabled = !localStream;
+      log('Conexión WebRTC establecida', 'success');
+    } catch (err) {
+      rtcStatusEl.textContent = 'Estado WebRTC: error';
+      connectBtn.disabled = false; disconnectBtn.disabled = true; sendCamBtn.disabled = true;
+      log(`Error conectando WebRTC: ${err.message}`, 'error');
+    }
+  }
+
+  async function sendWebCamTracks() {
+    try {
+      if (!pc) { return; }
+      if (!localStream) {
+        log('Activa la WebCam primero', 'warn');
+        return;
+      }
+      if (webcamTracksSent) {
+        log('Las tracks de WebCam ya fueron enviadas. Evitando duplicados.', 'warn');
+        return;
+      }
+      localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
+      webcamTracksSent = true;
+      sendCamBtn.disabled = true;
+      log('Tracks de WebCam enviadas al servidor', 'success');
+    } catch (err) {
+      log(`Error enviando tracks: ${err.message}`, 'error');
+    }
+  }
+
+  async function disconnectWebRTC() {
+    try {
+      if (pc) { pc.close(); pc = null; }
+      if (connectionId) {
+        await fetch(`/api/streaming/webrtc/${connectionId}`, { method: 'DELETE' });
+        connectionId = null;
+      }
+      remoteVideo.srcObject = null;
+      rtcStatusEl.textContent = 'Estado WebRTC: desconectado';
+      connectBtn.disabled = false; disconnectBtn.disabled = true; sendCamBtn.disabled = true;
+      log('Conexión WebRTC cerrada', 'warn');
+    } catch (err) {
+      log(`Error al desconectar: ${err.message}`, 'error');
+    }
+  }
+
+  // Bind UI
+  startCamBtn.addEventListener('click', startWebCam);
+  stopCamBtn.addEventListener('click', stopWebCam);
+  connectBtn.addEventListener('click', connectWebRTC);
+  sendCamBtn.addEventListener('click', sendWebCamTracks);
+  disconnectBtn.addEventListener('click', disconnectWebRTC);
+
+  async function loadCameras() {
+    try {
+      log('Cargando cámaras…');
+      const res = await fetch('/api/cameras/');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      cameraSelect.innerHTML = '<option value="">Seleccionar cámara...</option>';
+      for (const cam of data) {
+        const opt = document.createElement('option');
+        opt.value = cam.id;
+        opt.textContent = `${cam.name} (${cam.enabled ? 'Habilitada' : 'Deshabilitada'})`;
+        cameraSelect.appendChild(opt);
+      }
+      log(`Cámaras disponibles: ${data.length}`, 'success');
+    } catch (e) {
+      log('Error cargando cámaras: ' + e.message, 'error');
+    }
+  }
+
+  window.addEventListener('load', async () => { await loadRtcConfig(); await loadCameras(); });
+</script>
+</body>
+</html>

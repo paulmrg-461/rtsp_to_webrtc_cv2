@@ -32,18 +32,18 @@ def setup_logging():
     logger.add(
         sys.stdout,
         format=log_format,
-        level=settings.LOG_LEVEL,
+        level=settings.log_level,
         colorize=True,
         backtrace=True,
         diagnose=True
     )
     
     # Log a archivo si está configurado
-    if settings.LOG_FILE:
+    if settings.log_file:
         logger.add(
-            settings.LOG_FILE,
+            settings.log_file,
             format=log_format,
-            level=settings.LOG_LEVEL,
+            level=settings.log_level,
             rotation="10 MB",
             retention="7 days",
             compression="zip",
@@ -66,14 +66,16 @@ async def check_dependencies():
         import cv2
         logger.info(f"OpenCV versión: {cv2.__version__}")
         
-        import aiortc
-        logger.info(f"aiortc versión: {aiortc.__version__}")
+        # Comentado temporalmente hasta resolver problemas de instalación
+        # import aiortc
+        # logger.info(f"aiortc versión: {aiortc.__version__}")
         
         import socketio
-        logger.info(f"python-socketio versión: {socketio.__version__}")
+        logger.info(f"python-socketio disponible")
+        # logger.info(f"python-socketio versión: {socketio.__version__}")
         
         # Verificar GPU si está habilitada
-        if settings.USE_GPU:
+        if settings.use_gpu:
             try:
                 import torch
                 if torch.cuda.is_available():
@@ -93,8 +95,8 @@ async def check_dependencies():
 def create_directories():
     """Crear directorios necesarios"""
     directories = [
-        settings.STORAGE_PATH,
-        settings.LOGS_PATH,
+        settings.storage_path,
+        settings.logs_path,
         Path("static"),
         Path("temp")
     ]
@@ -107,8 +109,8 @@ def create_directories():
 async def main():
     """Función principal"""
     logger.info("🎥 Iniciando RTSP to WebRTC API")
-    logger.info(f"Versión: {settings.APP_VERSION}")
-    logger.info(f"Entorno: {settings.ENVIRONMENT}")
+    logger.info(f"Versión: {settings.app_version}")
+    logger.info(f"Entorno: {settings.environment}")
     
     # Configurar manejadores de señales
     signal.signal(signal.SIGINT, signal_handler)
@@ -122,29 +124,29 @@ async def main():
     # Crear directorios
     create_directories()
     
-    # Configuración del servidor
+    # Información de inicio
+    logger.info(f"Servidor iniciando en http://{settings.host}:{settings.port}")
+    logger.info(f"Documentación API: http://{settings.host}:{settings.port}/docs")
+    logger.info(f"Demo WebRTC: http://{settings.host}:{settings.port}/")
+    
+    if settings.rtsp_cameras:
+        logger.info(f"Cámaras RTSP configuradas: {len(settings.rtsp_cameras)}")
+        for camera_id, camera_config in settings.rtsp_cameras.items():
+            logger.info(f"  - {camera_id}: {camera_config.get('name', 'Sin nombre')}")
+    else:
+        logger.warning("No hay cámaras RTSP configuradas")
+    
+    # Configuración del servidor - IMPORTANTE: usar app en lugar de socket_app para que funcione lifespan
     config = uvicorn.Config(
         app="src.presentation.api.main:app",
-        host=settings.HOST,
-        port=settings.PORT,
-        reload=settings.ENVIRONMENT == "development",
-        log_level=settings.LOG_LEVEL.lower(),
+        host=settings.host,
+        port=settings.port,
+        reload=settings.environment == "development",
+        log_level=settings.log_level.lower(),
         access_log=True,
         use_colors=True,
         loop="asyncio"
     )
-    
-    # Información de inicio
-    logger.info(f"Servidor iniciando en http://{settings.HOST}:{settings.PORT}")
-    logger.info(f"Documentación API: http://{settings.HOST}:{settings.PORT}/docs")
-    logger.info(f"Demo WebRTC: http://{settings.HOST}:{settings.PORT}/")
-    
-    if settings.RTSP_CAMERAS:
-        logger.info(f"Cámaras RTSP configuradas: {len(settings.RTSP_CAMERAS)}")
-        for camera_id, camera_config in settings.RTSP_CAMERAS.items():
-            logger.info(f"  - {camera_id}: {camera_config.get('name', 'Sin nombre')}")
-    else:
-        logger.warning("No hay cámaras RTSP configuradas")
     
     # Iniciar servidor
     server = uvicorn.Server(config)

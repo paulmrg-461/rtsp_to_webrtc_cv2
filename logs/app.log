@@ -1,0 +1,901 @@
+2025-09-20 09:09:12 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-20 09:09:12 | INFO     | __main__:main:109 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-20 09:09:12 | INFO     | __main__:main:110 | Versión: 1.0.0
+2025-09-20 09:09:12 | INFO     | __main__:main:111 | Entorno: development
+2025-09-20 09:09:12 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-20 09:09:12 | ERROR    | __main__:check_dependencies:89 | Dependencia faltante: No module named 'aiortc'
+2025-09-20 09:09:12 | ERROR    | __main__:main:119 | Faltan dependencias críticas
+2025-09-20 09:10:40 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-20 09:10:40 | INFO     | __main__:main:110 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-20 09:10:40 | INFO     | __main__:main:111 | Versión: 1.0.0
+2025-09-20 09:10:40 | INFO     | __main__:main:112 | Entorno: development
+2025-09-20 09:10:40 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-20 09:10:41 | ERROR    | __main__:<module>:174 | Error fatal: module 'socketio' has no attribute '__version__'
+2025-09-20 09:10:55 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-20 09:10:55 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-20 09:10:55 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-20 09:10:55 | INFO     | __main__:main:113 | Entorno: development
+2025-09-20 09:10:55 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-20 09:10:56 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-20 09:10:56 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-20 09:10:56 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-20 09:10:56 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-20 09:10:56 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 1
+2025-09-20 09:10:56 | INFO     | __main__:main:147 |   - camera_1: Cámara de Prueba
+2025-09-20 09:10:56 | ERROR    | __main__:main:159 | Error crítico: No module named 'aiortc'
+2025-09-20 09:10:56 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-20 09:10:56 | ERROR    | __main__:<module>:175 | Error fatal: No module named 'aiortc'
+2025-09-20 09:13:19 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-20 09:13:19 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-20 09:13:19 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-20 09:13:19 | INFO     | __main__:main:113 | Entorno: development
+2025-09-20 09:13:19 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-20 09:13:19 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-20 09:13:19 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-20 09:13:19 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-20 09:13:19 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-20 09:13:19 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 1
+2025-09-20 09:13:19 | INFO     | __main__:main:147 |   - camera_1: Cámara de Prueba
+2025-09-20 09:13:19 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-20 09:13:59 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-20 09:14:00 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-20 09:14:00 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-20 09:14:00 | INFO     | __main__:main:113 | Entorno: development
+2025-09-20 09:14:00 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-20 09:14:00 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-20 09:14:00 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-20 09:14:00 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-20 09:14:00 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-20 09:14:00 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 1
+2025-09-20 09:14:00 | INFO     | __main__:main:147 |   - camera_1: Cámara de Prueba
+2025-09-20 09:14:00 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-20 09:14:23 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-20 09:14:23 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-20 09:14:23 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-20 09:14:23 | INFO     | __main__:main:113 | Entorno: development
+2025-09-20 09:14:23 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-20 09:14:24 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-20 09:14:24 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-20 09:14:24 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-20 09:14:24 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-20 09:14:24 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 1
+2025-09-20 09:14:24 | INFO     | __main__:main:147 |   - camera_1: Cámara de Prueba
+2025-09-20 09:16:37 | INFO     | __main__:signal_handler:59 | Señal 2 recibida, cerrando aplicación...
+2025-09-20 09:16:37 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-20 09:22:59 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-20 09:22:59 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-20 09:22:59 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-20 09:22:59 | INFO     | __main__:main:113 | Entorno: development
+2025-09-20 09:22:59 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-20 09:23:00 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-20 09:23:00 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-20 09:23:00 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-20 09:23:00 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-20 09:23:00 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 1
+2025-09-20 09:23:00 | INFO     | __main__:main:147 |   - camera_1: Cámara de Prueba
+2025-09-28 13:29:51 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-28 13:29:51 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-28 13:29:51 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-28 13:29:51 | INFO     | __main__:main:113 | Entorno: development
+2025-09-28 13:29:52 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-28 13:29:53 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-28 13:29:53 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-28 13:29:53 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-28 13:29:53 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-28 13:29:53 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 1
+2025-09-28 13:29:53 | INFO     | __main__:main:147 |   - camera_1: Cámara de Prueba
+2025-09-28 13:32:34 | INFO     | __main__:signal_handler:59 | Señal 2 recibida, cerrando aplicación...
+2025-09-28 13:32:34 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-28 13:45:17 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-28 13:45:17 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-28 13:45:17 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-28 13:45:17 | INFO     | __main__:main:113 | Entorno: development
+2025-09-28 13:45:17 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-28 13:45:17 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-28 13:45:17 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-28 13:45:17 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-28 13:45:17 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-28 13:45:17 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 2
+2025-09-28 13:45:17 | INFO     | __main__:main:147 |   - camera_1: Wowza Test Stream
+2025-09-28 13:45:17 | INFO     | __main__:main:147 |   - camera_2: Big Buck Bunny
+2025-09-28 13:54:07 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-28 13:54:25 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-28 13:54:25 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-28 13:54:25 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-28 13:54:25 | INFO     | __main__:main:113 | Entorno: development
+2025-09-28 13:54:25 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-28 13:54:25 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-28 13:54:25 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-28 13:54:25 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-28 13:54:25 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-28 13:54:25 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 2
+2025-09-28 13:54:25 | INFO     | __main__:main:147 |   - camera_1: Pattern Test Stream
+2025-09-28 13:54:25 | INFO     | __main__:main:147 |   - camera_2: Movie Test Stream
+2025-09-28 14:00:59 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-28 14:00:59 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-28 14:00:59 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-28 14:00:59 | INFO     | __main__:main:113 | Entorno: development
+2025-09-28 14:00:59 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-28 14:00:59 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-28 14:00:59 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-28 14:00:59 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-28 14:00:59 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-28 14:00:59 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 2
+2025-09-28 14:00:59 | INFO     | __main__:main:147 |   - camera_1: Pattern Test Stream
+2025-09-28 14:00:59 | INFO     | __main__:main:147 |   - camera_2: Movie Test Stream
+2025-09-28 14:07:26 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-28 14:07:27 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-28 14:07:27 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-28 14:07:27 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-28 14:07:27 | INFO     | __main__:main:113 | Entorno: development
+2025-09-28 14:07:27 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-28 14:07:27 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-28 14:07:27 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-28 14:07:27 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-28 14:07:27 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-28 14:07:27 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 2
+2025-09-28 14:07:27 | INFO     | __main__:main:147 |   - camera_1: Hessdalen Live Stream
+2025-09-28 14:07:27 | INFO     | __main__:main:147 |   - camera_2: BigCDN Test Stream
+2025-09-28 16:11:29 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-28 16:17:29 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-28 16:17:29 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-28 16:17:29 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-28 16:17:29 | INFO     | __main__:main:113 | Entorno: development
+2025-09-28 16:17:29 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-28 16:17:29 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-28 16:17:29 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-28 16:17:29 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-28 16:17:29 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-28 16:17:29 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 2
+2025-09-28 16:17:29 | INFO     | __main__:main:147 |   - camera_1: Demo Video Stream
+2025-09-28 16:17:29 | INFO     | __main__:main:147 |   - camera_2: Test Pattern Stream
+2025-09-28 16:32:58 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-28 16:32:59 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-28 16:32:59 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-28 16:32:59 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-28 16:32:59 | INFO     | __main__:main:113 | Entorno: development
+2025-09-28 16:32:59 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-28 16:33:00 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-28 16:33:00 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-28 16:33:00 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-28 16:33:00 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-28 16:33:00 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 2
+2025-09-28 16:33:00 | INFO     | __main__:main:147 |   - camera_1: Wowza Test Stream
+2025-09-28 16:33:00 | INFO     | __main__:main:147 |   - camera_2: BigCDN Test Stream
+2025-09-28 16:56:18 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-28 16:56:19 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-28 16:56:19 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-28 16:56:19 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-28 16:56:19 | INFO     | __main__:main:113 | Entorno: development
+2025-09-28 16:56:19 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-28 16:56:19 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-28 16:56:19 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-28 16:56:19 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-28 16:56:19 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-28 16:56:19 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 2
+2025-09-28 16:56:19 | INFO     | __main__:main:147 |   - camera_1: RTSP Test Stream 1
+2025-09-28 16:56:19 | INFO     | __main__:main:147 |   - camera_2: RTSP Test Stream 2
+2025-09-28 17:00:08 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-28 17:01:30 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-28 17:01:30 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-28 17:01:30 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-28 17:01:30 | INFO     | __main__:main:113 | Entorno: development
+2025-09-28 17:01:30 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-28 17:01:31 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-28 17:01:31 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-28 17:01:31 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-28 17:01:31 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-28 17:01:31 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-28 17:01:31 | INFO     | __main__:main:147 |   - camera_1: RTSP Test Stream 1
+2025-09-28 17:01:31 | INFO     | __main__:main:147 |   - camera_2: RTSP Test Stream 2
+2025-09-28 17:01:31 | INFO     | __main__:main:147 |   - camera_3: Usuario Test Stream
+2025-09-28 17:04:57 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-28 17:04:58 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-28 17:04:58 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-28 17:04:58 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-28 17:04:58 | INFO     | __main__:main:113 | Entorno: development
+2025-09-28 17:04:58 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-28 17:04:58 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-28 17:04:58 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-28 17:04:58 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-28 17:04:58 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-28 17:04:58 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-28 17:04:58 | INFO     | __main__:main:147 |   - camera_1: RTSP Test Stream 1
+2025-09-28 17:04:58 | INFO     | __main__:main:147 |   - camera_2: RTSP Test Stream 2
+2025-09-28 17:04:58 | INFO     | __main__:main:147 |   - camera_3: Usuario Test Stream
+2025-09-28 17:07:51 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-28 17:07:52 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-28 17:07:52 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-28 17:07:52 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-28 17:07:52 | INFO     | __main__:main:113 | Entorno: development
+2025-09-28 17:07:52 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-28 17:07:52 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-28 17:07:52 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-28 17:07:52 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-28 17:07:52 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-28 17:07:52 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-28 17:07:52 | INFO     | __main__:main:147 |   - camera_1: Big Buck Bunny Test Stream
+2025-09-28 17:07:52 | INFO     | __main__:main:147 |   - camera_2: Big Buck Bunny HD Stream
+2025-09-28 17:07:52 | INFO     | __main__:main:147 |   - camera_3: Sample MP4 Stream
+2025-09-29 07:20:05 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 07:20:05 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 07:20:05 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 07:20:05 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 07:20:06 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 07:20:07 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 07:20:07 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 07:20:07 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 07:20:07 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 07:20:07 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 07:20:07 | INFO     | __main__:main:147 |   - camera_1: Webcam Local - Opción 1
+2025-09-29 07:20:07 | INFO     | __main__:main:147 |   - camera_2: Webcam Local - Opción 2
+2025-09-29 07:20:07 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba (fallback)
+2025-09-29 07:20:29 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 07:20:36 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 07:20:36 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 07:20:36 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 07:20:36 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 07:20:36 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 07:20:36 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 07:20:36 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 07:20:36 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 07:20:36 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 07:20:36 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 07:20:36 | INFO     | __main__:main:147 |   - camera_1: Webcam Local - Opción 1
+2025-09-29 07:20:36 | INFO     | __main__:main:147 |   - camera_2: Webcam Local - Opción 2
+2025-09-29 07:20:36 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba (fallback)
+2025-09-29 07:21:32 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 07:21:32 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 07:21:32 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 07:21:32 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 07:21:32 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 07:21:33 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 07:21:33 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 07:21:33 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 07:21:33 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 07:21:33 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 07:21:33 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 07:21:33 | INFO     | __main__:main:147 |   - camera_1: WebCam Local Stream
+2025-09-29 07:21:33 | INFO     | __main__:main:147 |   - camera_2: Webcam Local - Opción 2
+2025-09-29 07:21:33 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba (fallback)
+2025-09-29 07:23:18 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 07:23:19 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 07:23:19 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 07:23:19 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 07:23:19 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 07:23:19 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 07:23:19 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 07:23:19 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 07:23:19 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 07:23:19 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 07:23:19 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 07:23:19 | INFO     | __main__:main:147 |   - camera_1: WebCam Local Stream
+2025-09-29 07:23:19 | INFO     | __main__:main:147 |   - camera_2: Stream de prueba RTSP
+2025-09-29 07:23:19 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba (fallback)
+2025-09-29 07:28:51 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 07:28:52 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 07:28:52 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 07:28:52 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 07:28:52 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 07:28:52 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 07:28:52 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 07:28:52 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 07:28:52 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 07:28:52 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 07:28:52 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 07:28:52 | INFO     | __main__:main:147 |   - camera_1: WebCam Local Stream
+2025-09-29 07:28:52 | INFO     | __main__:main:147 |   - camera_2: Stream de prueba RTSP
+2025-09-29 07:28:52 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba (fallback)
+2025-09-29 07:32:04 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 07:32:05 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 07:32:05 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 07:32:05 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 07:32:05 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 07:32:05 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 07:32:05 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 07:32:05 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 07:32:05 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 07:32:05 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 07:32:05 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 07:32:05 | INFO     | __main__:main:147 |   - camera_1: WebCam Local Stream
+2025-09-29 07:32:05 | INFO     | __main__:main:147 |   - camera_2: Stream de prueba RTSP
+2025-09-29 07:32:05 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba (fallback)
+2025-09-29 07:33:20 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 07:33:21 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 07:33:21 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 07:33:21 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 07:33:21 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 07:33:21 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 07:33:21 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 07:33:21 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 07:33:21 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 07:33:21 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 07:33:21 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 07:33:21 | INFO     | __main__:main:147 |   - camera_1: WebCam Local Stream
+2025-09-29 07:33:21 | INFO     | __main__:main:147 |   - camera_2: Stream de prueba RTSP
+2025-09-29 07:33:21 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba (fallback)
+2025-09-29 07:35:04 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 07:35:05 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 07:35:05 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 07:35:05 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 07:35:05 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 07:35:05 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 07:35:05 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 07:35:05 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 07:35:05 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 07:35:05 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 07:35:05 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 07:35:05 | INFO     | __main__:main:147 |   - camera_1: WebCam Local Stream
+2025-09-29 07:35:05 | INFO     | __main__:main:147 |   - camera_2: Stream de prueba RTSP
+2025-09-29 07:35:05 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba (fallback)
+2025-09-29 07:36:55 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 07:36:56 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 07:36:56 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 07:36:56 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 07:36:56 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 07:36:56 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 07:36:56 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 07:36:56 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 07:36:56 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 07:36:56 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 07:36:56 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 07:36:56 | INFO     | __main__:main:147 |   - camera_1: WebCam Local Stream
+2025-09-29 07:36:56 | INFO     | __main__:main:147 |   - camera_2: Stream de prueba RTSP
+2025-09-29 07:36:56 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba (fallback)
+2025-09-29 07:38:47 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 07:38:48 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 07:38:48 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 07:38:48 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 07:38:48 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 07:38:48 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 07:38:48 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 07:38:48 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 07:38:48 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 07:38:48 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 07:38:48 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 07:38:48 | INFO     | __main__:main:147 |   - camera_1: Stream de prueba - Big Buck Bunny
+2025-09-29 07:38:48 | INFO     | __main__:main:147 |   - camera_2: Stream de prueba - Elephant Dream
+2025-09-29 07:38:48 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba - Sintel
+2025-09-29 07:40:38 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 07:40:39 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 07:40:39 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 07:40:39 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 07:40:39 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 07:40:39 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 07:40:40 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 07:40:40 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 07:40:40 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 07:40:40 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 07:40:40 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 07:40:40 | INFO     | __main__:main:147 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 07:40:40 | INFO     | __main__:main:147 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 07:40:40 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 07:47:40 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 07:47:41 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 07:47:41 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 07:47:41 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 07:47:41 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 07:47:41 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 07:47:41 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 07:47:41 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 07:47:41 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 07:47:41 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 07:47:41 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 07:47:41 | INFO     | __main__:main:147 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 07:47:41 | INFO     | __main__:main:147 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 07:47:41 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 07:48:57 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 07:48:57 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 07:48:57 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 07:48:57 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 07:48:57 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 07:48:57 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 07:48:58 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 07:48:58 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 07:48:58 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 07:48:58 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 07:48:58 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 07:48:58 | INFO     | __main__:main:147 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 07:48:58 | INFO     | __main__:main:147 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 07:48:58 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 07:51:39 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 07:51:39 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 07:51:39 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 07:51:39 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 07:51:39 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 07:51:40 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 07:51:40 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 07:51:40 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 07:51:40 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 07:51:40 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 07:51:40 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 07:51:40 | INFO     | __main__:main:147 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 07:51:40 | INFO     | __main__:main:147 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 07:51:40 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 07:53:38 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 07:53:39 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 07:53:39 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 07:53:39 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 07:53:39 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 07:53:39 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 07:53:39 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 07:53:39 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 07:53:39 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 07:53:39 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 07:53:39 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 07:53:39 | INFO     | __main__:main:147 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 07:53:39 | INFO     | __main__:main:147 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 07:53:39 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 07:55:38 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 07:55:39 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 07:55:39 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 07:55:39 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 07:55:39 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 07:55:39 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 07:55:39 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 07:55:39 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 07:55:39 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 07:55:39 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 07:55:39 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 07:55:39 | INFO     | __main__:main:147 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 07:55:39 | INFO     | __main__:main:147 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 07:55:39 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 08:02:39 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 08:02:40 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 08:02:40 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 08:02:40 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 08:02:40 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 08:02:40 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 08:02:40 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 08:02:40 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 08:02:40 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 08:02:40 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 08:02:40 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 08:02:40 | INFO     | __main__:main:147 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 08:02:40 | INFO     | __main__:main:147 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 08:02:40 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 08:10:27 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 08:10:28 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 08:10:28 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 08:10:28 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 08:10:28 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 08:10:28 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 08:10:28 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 08:10:28 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 08:10:28 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 08:10:28 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 08:10:28 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 08:10:28 | INFO     | __main__:main:147 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 08:10:28 | INFO     | __main__:main:147 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 08:10:28 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 08:13:35 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 08:13:35 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 08:13:35 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 08:13:35 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 08:13:35 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 08:13:36 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 08:13:36 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 08:13:36 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 08:13:36 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 08:13:36 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 08:13:36 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 08:13:36 | INFO     | __main__:main:147 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 08:13:36 | INFO     | __main__:main:147 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 08:13:36 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 08:17:17 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 08:17:18 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 08:17:18 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 08:17:18 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 08:17:18 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 08:17:18 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 08:17:18 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 08:17:18 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 08:17:18 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 08:17:18 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 08:17:18 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 08:17:18 | INFO     | __main__:main:147 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 08:17:18 | INFO     | __main__:main:147 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 08:17:18 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 08:20:07 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 08:20:08 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 08:20:08 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 08:20:08 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 08:20:08 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 08:20:08 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 08:20:08 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 08:20:08 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 08:20:08 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 08:20:08 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 08:20:08 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 08:20:08 | INFO     | __main__:main:147 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 08:20:08 | INFO     | __main__:main:147 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 08:20:08 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 08:22:56 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 08:22:57 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 08:22:57 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 08:22:57 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 08:22:57 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 08:22:57 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 08:22:57 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 08:22:57 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 08:22:57 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 08:22:57 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 08:22:57 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 08:22:57 | INFO     | __main__:main:147 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 08:22:57 | INFO     | __main__:main:147 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 08:22:57 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 08:25:57 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 08:25:58 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 08:25:58 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 08:25:58 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 08:25:58 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 08:25:58 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 08:25:58 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 08:25:58 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 08:25:58 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 08:25:58 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 08:25:58 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 08:25:58 | INFO     | __main__:main:147 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 08:25:58 | INFO     | __main__:main:147 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 08:25:58 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 08:32:50 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 08:32:50 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 08:32:50 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 08:32:50 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 08:32:50 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 08:32:50 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 08:32:51 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 08:32:51 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 08:32:51 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 08:32:51 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 08:32:51 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 08:32:51 | INFO     | __main__:main:147 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 08:32:51 | INFO     | __main__:main:147 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 08:32:51 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 08:44:29 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 08:44:29 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 08:44:29 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 08:44:30 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 08:44:30 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 08:44:30 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 08:44:30 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 08:44:30 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 08:44:30 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 08:44:30 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 08:44:30 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 08:44:30 | INFO     | __main__:main:147 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 08:44:30 | INFO     | __main__:main:147 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 08:44:30 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 08:48:37 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 08:48:37 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 08:48:37 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 08:48:37 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 08:48:37 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 08:48:38 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 08:48:38 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 08:48:38 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 08:48:38 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 08:48:38 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 08:48:38 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 08:48:38 | INFO     | __main__:main:147 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 08:48:38 | INFO     | __main__:main:147 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 08:48:38 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 08:53:24 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 08:53:25 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 08:53:25 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 08:53:25 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 08:53:25 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 08:53:25 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 08:53:25 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 08:53:25 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 08:53:25 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 08:53:25 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 08:53:25 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 08:53:25 | INFO     | __main__:main:147 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 08:53:25 | INFO     | __main__:main:147 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 08:53:25 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 08:58:35 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 08:58:35 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 08:58:35 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 08:58:35 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 08:58:35 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 08:58:35 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 08:58:36 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 08:58:36 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 08:58:36 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 08:58:36 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 08:58:36 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 08:58:36 | INFO     | __main__:main:147 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 08:58:36 | INFO     | __main__:main:147 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 08:58:36 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 09:11:32 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 09:11:33 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 09:11:33 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 09:11:33 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 09:11:33 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 09:11:33 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 09:11:33 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 09:11:33 | INFO     | __main__:main:140 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 09:11:33 | INFO     | __main__:main:141 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 09:11:33 | INFO     | __main__:main:142 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 09:11:33 | INFO     | __main__:main:145 | Cámaras RTSP configuradas: 3
+2025-09-29 09:11:33 | INFO     | __main__:main:147 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 09:11:33 | INFO     | __main__:main:147 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 09:11:33 | INFO     | __main__:main:147 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 09:15:41 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 12:19:12 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 12:19:12 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 12:19:12 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 12:19:12 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 12:19:12 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 12:19:13 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 12:19:13 | INFO     | __main__:main:128 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 12:19:13 | INFO     | __main__:main:129 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 12:19:13 | INFO     | __main__:main:130 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 12:19:13 | INFO     | __main__:main:133 | Cámaras RTSP configuradas: 3
+2025-09-29 12:19:13 | INFO     | __main__:main:135 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 12:19:13 | INFO     | __main__:main:135 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 12:19:13 | INFO     | __main__:main:135 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 12:20:22 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 12:20:23 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 12:20:23 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 12:20:23 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 12:20:23 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 12:20:23 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 12:20:23 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 12:20:23 | INFO     | __main__:main:128 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 12:20:23 | INFO     | __main__:main:129 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 12:20:23 | INFO     | __main__:main:130 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 12:20:23 | INFO     | __main__:main:133 | Cámaras RTSP configuradas: 3
+2025-09-29 12:20:23 | INFO     | __main__:main:135 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 12:20:23 | INFO     | __main__:main:135 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 12:20:23 | INFO     | __main__:main:135 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 12:22:39 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 12:22:49 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 12:22:49 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 12:22:49 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 12:22:49 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 12:22:49 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 12:22:50 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 12:22:50 | INFO     | __main__:main:128 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 12:22:50 | INFO     | __main__:main:129 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 12:22:50 | INFO     | __main__:main:130 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 12:22:50 | INFO     | __main__:main:133 | Cámaras RTSP configuradas: 3
+2025-09-29 12:22:50 | INFO     | __main__:main:135 |   - camera_1: Cámara de prueba - Webcam local
+2025-09-29 12:22:50 | INFO     | __main__:main:135 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 12:22:50 | INFO     | __main__:main:135 |   - camera_3: Stream de prueba - Archivo local
+2025-09-29 12:25:18 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-09-29 12:25:29 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-29 12:25:29 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-29 12:25:29 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-29 12:25:29 | INFO     | __main__:main:113 | Entorno: development
+2025-09-29 12:25:29 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-29 12:25:29 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-29 12:25:29 | INFO     | __main__:main:128 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-29 12:25:29 | INFO     | __main__:main:129 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-29 12:25:29 | INFO     | __main__:main:130 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-29 12:25:29 | INFO     | __main__:main:133 | Cámaras RTSP configuradas: 3
+2025-09-29 12:25:29 | INFO     | __main__:main:135 |   - camera_1: Cámara de prueba - Video local
+2025-09-29 12:25:29 | INFO     | __main__:main:135 |   - camera_2: Stream RTSP público - Wowza
+2025-09-29 12:25:29 | INFO     | __main__:main:135 |   - camera_3: Stream de prueba - Archivo local
+2025-09-30 11:47:08 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-09-30 11:47:08 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-09-30 11:47:08 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-09-30 11:47:08 | INFO     | __main__:main:113 | Entorno: development
+2025-09-30 11:47:09 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-09-30 11:47:09 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-09-30 11:47:09 | INFO     | __main__:main:128 | Servidor iniciando en http://0.0.0.0:8990
+2025-09-30 11:47:09 | INFO     | __main__:main:129 | Documentación API: http://0.0.0.0:8990/docs
+2025-09-30 11:47:09 | INFO     | __main__:main:130 | Demo WebRTC: http://0.0.0.0:8990/
+2025-09-30 11:47:09 | INFO     | __main__:main:133 | Cámaras RTSP configuradas: 3
+2025-09-30 11:47:09 | INFO     | __main__:main:135 |   - camera_1: Cámara de prueba - Video local
+2025-09-30 11:47:09 | INFO     | __main__:main:135 |   - camera_2: Stream RTSP público - Wowza
+2025-09-30 11:47:09 | INFO     | __main__:main:135 |   - camera_3: Stream de prueba - Archivo local
+2025-10-02 15:20:19 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-10-02 15:20:19 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-10-02 15:20:19 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-10-02 15:20:19 | INFO     | __main__:main:113 | Entorno: development
+2025-10-02 15:20:19 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-10-02 15:20:19 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-10-02 15:20:19 | INFO     | __main__:main:128 | Servidor iniciando en http://0.0.0.0:8990
+2025-10-02 15:20:19 | INFO     | __main__:main:129 | Documentación API: http://0.0.0.0:8990/docs
+2025-10-02 15:20:19 | INFO     | __main__:main:130 | Demo WebRTC: http://0.0.0.0:8990/
+2025-10-02 15:20:19 | INFO     | __main__:main:133 | Cámaras RTSP configuradas: 3
+2025-10-02 15:20:19 | INFO     | __main__:main:135 |   - camera_1: Cámara de prueba - Video local
+2025-10-02 15:20:19 | INFO     | __main__:main:135 |   - camera_2: Stream RTSP público - Wowza
+2025-10-02 15:20:19 | INFO     | __main__:main:135 |   - camera_3: Stream de prueba - Archivo local
+2025-10-02 15:20:19 | INFO     | __main__:signal_handler:59 | Señal 15 recibida, cerrando aplicación...
+2025-10-02 15:20:19 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-10-02 16:01:15 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-10-02 16:01:15 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-10-02 16:01:15 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-10-02 16:01:15 | INFO     | __main__:main:113 | Entorno: development
+2025-10-02 16:01:15 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-10-02 16:01:15 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-10-02 16:01:15 | INFO     | __main__:main:128 | Servidor iniciando en http://0.0.0.0:8990
+2025-10-02 16:01:15 | INFO     | __main__:main:129 | Documentación API: http://0.0.0.0:8990/docs
+2025-10-02 16:01:15 | INFO     | __main__:main:130 | Demo WebRTC: http://0.0.0.0:8990/
+2025-10-02 16:01:15 | INFO     | __main__:main:133 | Cámaras RTSP configuradas: 3
+2025-10-02 16:01:15 | INFO     | __main__:main:135 |   - camera_1: Cámara de prueba - Video local
+2025-10-02 16:01:15 | INFO     | __main__:main:135 |   - camera_2: Stream RTSP público - Wowza
+2025-10-02 16:01:15 | INFO     | __main__:main:135 |   - camera_3: Stream de prueba - Archivo local
+2025-10-02 16:48:32 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-10-02 17:20:24 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-10-02 17:20:24 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-10-02 17:20:24 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-10-02 17:20:24 | INFO     | __main__:main:113 | Entorno: development
+2025-10-02 17:20:24 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-10-02 17:20:24 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-10-02 17:20:27 | INFO     | __main__:check_dependencies:82 | CUDA disponible: NVIDIA GeForce RTX 5070
+2025-10-02 17:20:27 | INFO     | __main__:main:128 | Servidor iniciando en http://0.0.0.0:8990
+2025-10-02 17:20:27 | INFO     | __main__:main:129 | Documentación API: http://0.0.0.0:8990/docs
+2025-10-02 17:20:27 | INFO     | __main__:main:130 | Demo WebRTC: http://0.0.0.0:8990/
+2025-10-02 17:20:27 | INFO     | __main__:main:133 | Cámaras RTSP configuradas: 3
+2025-10-02 17:20:27 | INFO     | __main__:main:135 |   - camera_1: Cámara de prueba - Video local
+2025-10-02 17:20:27 | INFO     | __main__:main:135 |   - camera_2: Stream RTSP público - Wowza
+2025-10-02 17:20:27 | INFO     | __main__:main:135 |   - camera_3: Stream de prueba - Archivo local
+2025-10-02 17:26:42 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-10-02 17:26:44 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-10-02 17:26:44 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-10-02 17:26:44 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-10-02 17:26:44 | INFO     | __main__:main:113 | Entorno: development
+2025-10-02 17:26:44 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-10-02 17:26:44 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-10-02 17:26:45 | INFO     | __main__:check_dependencies:82 | CUDA disponible: NVIDIA GeForce RTX 5070
+2025-10-02 17:26:45 | INFO     | __main__:main:128 | Servidor iniciando en http://0.0.0.0:8990
+2025-10-02 17:26:45 | INFO     | __main__:main:129 | Documentación API: http://0.0.0.0:8990/docs
+2025-10-02 17:26:45 | INFO     | __main__:main:130 | Demo WebRTC: http://0.0.0.0:8990/
+2025-10-02 17:26:45 | INFO     | __main__:main:133 | Cámaras RTSP configuradas: 3
+2025-10-02 17:26:45 | INFO     | __main__:main:135 |   - camera_1: Cámara de prueba - Video local
+2025-10-02 17:26:45 | INFO     | __main__:main:135 |   - camera_2: Stream RTSP público - Wowza
+2025-10-02 17:26:45 | INFO     | __main__:main:135 |   - camera_3: Stream de prueba - Archivo local
+2025-10-02 17:34:31 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-10-02 17:34:35 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-10-02 17:34:35 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-10-02 17:34:35 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-10-02 17:34:35 | INFO     | __main__:main:113 | Entorno: development
+2025-10-02 17:34:35 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-10-02 17:34:35 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-10-02 17:34:37 | INFO     | __main__:check_dependencies:82 | CUDA disponible: NVIDIA GeForce RTX 5070
+2025-10-02 17:34:37 | INFO     | __main__:main:128 | Servidor iniciando en http://0.0.0.0:8990
+2025-10-02 17:34:37 | INFO     | __main__:main:129 | Documentación API: http://0.0.0.0:8990/docs
+2025-10-02 17:34:37 | INFO     | __main__:main:130 | Demo WebRTC: http://0.0.0.0:8990/
+2025-10-02 17:34:37 | INFO     | __main__:main:133 | Cámaras RTSP configuradas: 3
+2025-10-02 17:34:37 | INFO     | __main__:main:135 |   - camera_1: Cámara de prueba - Video local
+2025-10-02 17:34:37 | INFO     | __main__:main:135 |   - camera_2: Stream RTSP público - Wowza
+2025-10-02 17:34:37 | INFO     | __main__:main:135 |   - camera_3: Stream de prueba - Archivo local
+2025-10-02 17:49:27 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-10-02 18:04:55 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-10-02 18:04:55 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-10-02 18:04:55 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-10-02 18:04:55 | INFO     | __main__:main:113 | Entorno: development
+2025-10-02 18:04:55 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-10-02 18:04:55 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-10-02 18:04:56 | INFO     | __main__:check_dependencies:82 | CUDA disponible: NVIDIA GeForce RTX 5070
+2025-10-02 18:04:56 | INFO     | __main__:main:128 | Servidor iniciando en http://0.0.0.0:8990
+2025-10-02 18:04:56 | INFO     | __main__:main:129 | Documentación API: http://0.0.0.0:8990/docs
+2025-10-02 18:04:56 | INFO     | __main__:main:130 | Demo WebRTC: http://0.0.0.0:8990/
+2025-10-02 18:04:56 | INFO     | __main__:main:133 | Cámaras RTSP configuradas: 3
+2025-10-02 18:04:56 | INFO     | __main__:main:135 |   - camera_1: Cámara de prueba - Video local
+2025-10-02 18:04:56 | INFO     | __main__:main:135 |   - camera_2: Stream RTSP público - Wowza
+2025-10-02 18:04:56 | INFO     | __main__:main:135 |   - camera_3: Stream de prueba - Archivo local
+2025-10-02 18:13:34 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-10-02 18:13:37 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-10-02 18:13:37 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-10-02 18:13:37 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-10-02 18:13:37 | INFO     | __main__:main:113 | Entorno: development
+2025-10-02 18:13:37 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-10-02 18:13:37 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-10-02 18:13:39 | INFO     | __main__:check_dependencies:82 | CUDA disponible: NVIDIA GeForce RTX 5070
+2025-10-02 18:13:39 | INFO     | __main__:main:128 | Servidor iniciando en http://0.0.0.0:8990
+2025-10-02 18:13:39 | INFO     | __main__:main:129 | Documentación API: http://0.0.0.0:8990/docs
+2025-10-02 18:13:39 | INFO     | __main__:main:130 | Demo WebRTC: http://0.0.0.0:8990/
+2025-10-02 18:13:39 | INFO     | __main__:main:133 | Cámaras RTSP configuradas: 3
+2025-10-02 18:13:39 | INFO     | __main__:main:135 |   - camera_1: Cámara de prueba - Video local
+2025-10-02 18:13:39 | INFO     | __main__:main:135 |   - camera_2: Stream RTSP público - Wowza
+2025-10-02 18:13:39 | INFO     | __main__:main:135 |   - camera_3: Stream de prueba - Archivo local
+2025-10-02 18:18:39 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-10-02 18:18:41 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-10-02 18:18:41 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-10-02 18:18:41 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-10-02 18:18:41 | INFO     | __main__:main:113 | Entorno: development
+2025-10-02 18:18:42 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-10-02 18:18:42 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-10-02 18:18:43 | INFO     | __main__:check_dependencies:82 | CUDA disponible: NVIDIA GeForce RTX 5070
+2025-10-02 18:18:43 | INFO     | __main__:main:128 | Servidor iniciando en http://0.0.0.0:8990
+2025-10-02 18:18:43 | INFO     | __main__:main:129 | Documentación API: http://0.0.0.0:8990/docs
+2025-10-02 18:18:43 | INFO     | __main__:main:130 | Demo WebRTC: http://0.0.0.0:8990/
+2025-10-02 18:18:43 | INFO     | __main__:main:133 | Cámaras RTSP configuradas: 3
+2025-10-02 18:18:43 | INFO     | __main__:main:135 |   - camera_1: Cámara de prueba - Video local
+2025-10-02 18:18:43 | INFO     | __main__:main:135 |   - camera_2: Stream RTSP público - Wowza
+2025-10-02 18:18:43 | INFO     | __main__:main:135 |   - camera_3: Stream de prueba - Archivo local
+2025-10-02 18:25:09 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-10-02 18:25:12 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-10-02 18:25:12 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-10-02 18:25:12 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-10-02 18:25:12 | INFO     | __main__:main:113 | Entorno: development
+2025-10-02 18:25:12 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-10-02 18:25:12 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-10-02 18:25:13 | INFO     | __main__:check_dependencies:82 | CUDA disponible: NVIDIA GeForce RTX 5070
+2025-10-02 18:25:13 | INFO     | __main__:main:128 | Servidor iniciando en http://0.0.0.0:8990
+2025-10-02 18:25:13 | INFO     | __main__:main:129 | Documentación API: http://0.0.0.0:8990/docs
+2025-10-02 18:25:13 | INFO     | __main__:main:130 | Demo WebRTC: http://0.0.0.0:8990/
+2025-10-02 18:25:13 | INFO     | __main__:main:133 | Cámaras RTSP configuradas: 3
+2025-10-02 18:25:13 | INFO     | __main__:main:135 |   - camera_1: Cámara de prueba - Video local
+2025-10-02 18:25:13 | INFO     | __main__:main:135 |   - camera_2: Stream RTSP público - Wowza
+2025-10-02 18:25:13 | INFO     | __main__:main:135 |   - camera_3: Stream de prueba - Archivo local
+2025-10-02 18:27:36 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-10-02 18:27:39 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-10-02 18:27:39 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-10-02 18:27:39 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-10-02 18:27:39 | INFO     | __main__:main:113 | Entorno: development
+2025-10-02 18:27:39 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-10-02 18:27:39 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-10-02 18:27:41 | INFO     | __main__:check_dependencies:82 | CUDA disponible: NVIDIA GeForce RTX 5070
+2025-10-02 18:27:41 | INFO     | __main__:main:128 | Servidor iniciando en http://0.0.0.0:8990
+2025-10-02 18:27:41 | INFO     | __main__:main:129 | Documentación API: http://0.0.0.0:8990/docs
+2025-10-02 18:27:41 | INFO     | __main__:main:130 | Demo WebRTC: http://0.0.0.0:8990/
+2025-10-02 18:27:41 | INFO     | __main__:main:133 | Cámaras RTSP configuradas: 3
+2025-10-02 18:27:41 | INFO     | __main__:main:135 |   - camera_1: Cámara de prueba - Video local
+2025-10-02 18:27:41 | INFO     | __main__:main:135 |   - camera_2: Stream RTSP público - Wowza
+2025-10-02 18:27:41 | INFO     | __main__:main:135 |   - camera_3: Stream de prueba - Archivo local
+2025-10-02 18:57:49 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-10-02 18:57:52 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-10-02 18:57:52 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-10-02 18:57:52 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-10-02 18:57:52 | INFO     | __main__:main:113 | Entorno: development
+2025-10-02 18:57:52 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-10-02 18:57:52 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-10-02 18:57:54 | INFO     | __main__:check_dependencies:82 | CUDA disponible: NVIDIA GeForce RTX 5070
+2025-10-02 18:57:54 | INFO     | __main__:main:128 | Servidor iniciando en http://0.0.0.0:8990
+2025-10-02 18:57:54 | INFO     | __main__:main:129 | Documentación API: http://0.0.0.0:8990/docs
+2025-10-02 18:57:54 | INFO     | __main__:main:130 | Demo WebRTC: http://0.0.0.0:8990/
+2025-10-02 18:57:54 | INFO     | __main__:main:133 | Cámaras RTSP configuradas: 3
+2025-10-02 18:57:54 | INFO     | __main__:main:135 |   - camera_1: Cámara de prueba - Video local
+2025-10-02 18:57:54 | INFO     | __main__:main:135 |   - camera_2: Stream RTSP público - Wowza
+2025-10-02 18:57:54 | INFO     | __main__:main:135 |   - camera_3: Stream de prueba - Archivo local
+2025-10-02 18:59:12 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-10-02 18:59:14 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-10-02 18:59:14 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-10-02 18:59:14 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-10-02 18:59:14 | INFO     | __main__:main:113 | Entorno: development
+2025-10-02 18:59:14 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-10-02 18:59:15 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-10-02 18:59:16 | INFO     | __main__:check_dependencies:82 | CUDA disponible: NVIDIA GeForce RTX 5070
+2025-10-02 18:59:16 | INFO     | __main__:main:128 | Servidor iniciando en http://0.0.0.0:8990
+2025-10-02 18:59:16 | INFO     | __main__:main:129 | Documentación API: http://0.0.0.0:8990/docs
+2025-10-02 18:59:16 | INFO     | __main__:main:130 | Demo WebRTC: http://0.0.0.0:8990/
+2025-10-02 18:59:16 | INFO     | __main__:main:133 | Cámaras RTSP configuradas: 3
+2025-10-02 18:59:16 | INFO     | __main__:main:135 |   - camera_1: Cámara de prueba - Video local
+2025-10-02 18:59:16 | INFO     | __main__:main:135 |   - camera_2: Stream RTSP público - Wowza
+2025-10-02 18:59:16 | INFO     | __main__:main:135 |   - camera_3: Stream de prueba - Archivo local
+2025-10-02 19:06:10 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-10-02 19:06:13 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-10-02 19:06:13 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-10-02 19:06:13 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-10-02 19:06:13 | INFO     | __main__:main:113 | Entorno: development
+2025-10-02 19:06:13 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-10-02 19:06:13 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-10-02 19:06:15 | INFO     | __main__:check_dependencies:82 | CUDA disponible: NVIDIA GeForce RTX 5070
+2025-10-02 19:06:15 | INFO     | __main__:main:128 | Servidor iniciando en http://0.0.0.0:8990
+2025-10-02 19:06:15 | INFO     | __main__:main:129 | Documentación API: http://0.0.0.0:8990/docs
+2025-10-02 19:06:15 | INFO     | __main__:main:130 | Demo WebRTC: http://0.0.0.0:8990/
+2025-10-02 19:06:15 | INFO     | __main__:main:133 | Cámaras RTSP configuradas: 3
+2025-10-02 19:06:15 | INFO     | __main__:main:135 |   - camera_1: Cámara de prueba - Video local
+2025-10-02 19:06:15 | INFO     | __main__:main:135 |   - camera_2: Stream RTSP público - Wowza
+2025-10-02 19:06:15 | INFO     | __main__:main:135 |   - camera_3: Stream de prueba - Archivo local
+2025-10-02 19:13:21 | INFO     | __main__:main:162 | Aplicación finalizada
+2025-10-02 19:13:24 | INFO     | __main__:setup_logging:54 | Sistema de logging configurado
+2025-10-02 19:13:24 | INFO     | __main__:main:111 | 🎥 Iniciando RTSP to WebRTC API
+2025-10-02 19:13:24 | INFO     | __main__:main:112 | Versión: 1.0.0
+2025-10-02 19:13:24 | INFO     | __main__:main:113 | Entorno: development
+2025-10-02 19:13:24 | INFO     | __main__:check_dependencies:67 | OpenCV versión: 4.12.0
+2025-10-02 19:13:24 | INFO     | __main__:check_dependencies:74 | python-socketio disponible
+2025-10-02 19:13:26 | INFO     | __main__:check_dependencies:82 | CUDA disponible: NVIDIA GeForce RTX 5070
+2025-10-02 19:13:26 | INFO     | __main__:main:128 | Servidor iniciando en http://0.0.0.0:8990
+2025-10-02 19:13:26 | INFO     | __main__:main:129 | Documentación API: http://0.0.0.0:8990/docs
+2025-10-02 19:13:26 | INFO     | __main__:main:130 | Demo WebRTC: http://0.0.0.0:8990/
+2025-10-02 19:13:26 | INFO     | __main__:main:133 | Cámaras RTSP configuradas: 3
+2025-10-02 19:13:26 | INFO     | __main__:main:135 |   - camera_1: Cámara de prueba - Video local
+2025-10-02 19:13:26 | INFO     | __main__:main:135 |   - camera_2: Stream RTSP público - Wowza
+2025-10-02 19:13:26 | INFO     | __main__:main:135 |   - camera_3: Stream de prueba - Archivo local

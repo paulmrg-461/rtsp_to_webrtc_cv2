@@ -6,6 +6,7 @@ import os
 from typing import Dict, List, Any, Optional
 from pathlib import Path
 from pydantic_settings import BaseSettings
+from pydantic import ConfigDict
 
 
 class Settings(BaseSettings):
@@ -21,9 +22,10 @@ class Settings(BaseSettings):
     port: int = 8990
     
     # Detección de Movimiento
-    motion_threshold: int = 25
-    motion_min_area: int = 500
-    motion_blur_size: int = 21
+    motion_threshold: int = 20
+    motion_min_area: int = 300
+    motion_blur_size: int = 15
+    motion_detection_enabled: bool = True
     
     # Video
     video_width: int = 640
@@ -51,21 +53,54 @@ class Settings(BaseSettings):
     socketio_async_mode: str = "asgi"
     
     # WebRTC
-    webrtc_ice_servers: List[str] = ["stun:stun.l.google.com:19302"]
+    webrtc_ice_servers: List[Any] = [
+        "stun:stun.l.google.com:19302",
+        {"urls": ["turn:openrelay.metered.ca:80"], "username": "openrelayproject", "credential": "openrelayproject"},
+        {"urls": ["turn:openrelay.metered.ca:443"], "username": "openrelayproject", "credential": "openrelayproject"},
+    ]
     
-    # Cámaras RTSP por defecto
+    # Configuraciones adicionales del .env (opcionales)
+    core_api_base_url: Optional[str] = None
+    cloud_endpoint: Optional[str] = None
+    local_base_url: Optional[str] = None
+    site_id: Optional[str] = None
+    local_postgres_db: Optional[str] = None
+    local_postgres_user: Optional[str] = None
+    local_postgres_password: Optional[str] = None
+    local_database_url: Optional[str] = None
+    email_host: Optional[str] = None
+    app_email: Optional[str] = None
+    app_email_password: Optional[str] = None    
+    core_api_url: Optional[str] = None
+    recording_disks: Optional[str] = None
+    max_disk_usage_percent: Optional[str] = None
+    check_interval: Optional[str] = None
+    
+    # Configuración de cámaras RTSP
     rtsp_cameras: Dict[str, Dict[str, Any]] = {
         "camera_1": {
-            "name": "Cámara de Prueba",
-            "url": "rtsp://admin:password@192.168.1.10:554/cam/realmonitor?channel=1&subtype=1",
+        "name": "Cámara de prueba - Video local",
+        "url": "/app/static/sample_video.mp4",
+        "enabled": True
+    },
+        "camera_2": {
+            "name": "Stream RTSP público - Wowza",
+            "url": "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4",
+            "enabled": True
+        },
+        "camera_3": {
+            "name": "Stream de prueba - Archivo local",
+            "url": "/app/static/sample_video.mp4",
             "enabled": True
         }
     }
     
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-        case_sensitive = False
+    model_config = ConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        case_sensitive=False,
+        extra="allow",
+    )
 
 
 # Instancia global de configuración

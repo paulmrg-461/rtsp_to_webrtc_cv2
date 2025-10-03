@@ -11,7 +11,7 @@ from typing import List, Dict, Any
 class CameraAPIClient:
     """Cliente para la API de gestión de cámaras"""
     
-    def __init__(self, base_url: str = "http://localhost:8990"):
+    def __init__(self, base_url: str = "http://127.0.0.1:8990"):
         self.base_url = base_url
         self.api_url = f"{base_url}/api/v2/cameras"
         

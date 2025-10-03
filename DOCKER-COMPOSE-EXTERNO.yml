@@ -1,0 +1,201 @@
+services:
+  rtsp-to-webrtc:
+    build:
+      context: ./rtsp_to_webrtc_cv2
+      dockerfile: Dockerfile
+    container_name: rtsp_to_webrtc_app
+    ports:
+      - "8990:8990"
+    volumes:
+      - ./videos:/app/videos
+      - ./output:/app/output
+      - ./streams:/app/streams
+      - ./logs:/app/logs
+      - ./src:/app/src
+      - ./static:/app/static
+      - ./.env:/app/.env
+    env_file:
+      - .env
+    environment:
+      - PYTHONPATH=/app
+      - LOG_LEVEL=INFO
+      - APP_HOST=0.0.0.0
+      - APP_PORT=8990
+      - TZ=America/Bogota
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8990/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+    network_mode: host
+    extra_hosts:
+      - "host.docker.internal:host-gateway" 
+
+  go2rtc:
+    build:
+      context: ./liveviews_service/go2rtc-master
+      dockerfile: docker/hardware.Dockerfile
+    container_name: go2rtc
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - ./liveviews_service/config/:/config
+    environment:
+      - TZ=America/Bogota
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility,graphics
+      - LIBVA_DRIVER_NAME=nvidia   
+    command: ["go2rtc", "-config", "/config/go2rtc.yaml"]
+    devices:
+        - "/dev/dri:/dev/dri"
+        - "/dev/nvidia0:/dev/nvidia0"
+        - "/dev/nvidiactl:/dev/nvidiactl"
+        - "/dev/nvidia-uvm:/dev/nvidia-uvm"
+    privileged: true
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    extra_hosts:
+      - "host.docker.internal:host-gateway" 
+
+  turn_server:
+    image: coturn/coturn
+    container_name: turn_server
+    ports:
+      - "3478:3478/udp"
+      - "3478:3478/tcp"
+    volumes:
+      - ./turn_server/turnserver.conf:/etc/turnserver.conf
+      - ./turn_server/certs/turn_server_cert.pem:/etc/coturn/turn_server_cert.pem
+      - ./turn_server/certs/turn_server_pkey.pem:/etc/coturn/turn_server_pkey.pem
+      - turn_logs:/var/log/turnserver
+    command: ["turnserver", "-c", "/etc/turnserver.conf"]
+    network_mode: host  # Mantener para acceso a cámaras
+    # networks:
+    #   - proxy_net
+    # extra_hosts:
+    #   - "host.docker.internal:host-gateway"
+ 
+  bnb-local-core-web:
+    build:
+      context: ./bnb-local-core
+    container_name: bnb-local-core-web
+    command: uvicorn app.main:app --host 0.0.0.0 --port 9898
+    expose:
+      - "9898"
+    volumes:
+      - ./bnb-local-core/app:/code/app
+      - ./bnb-local-core/app/static:/code/app/static
+      - ./bnb-local-core/tests:/code/tests
+      - D_videos:/host_mnt/d/videos
+      - E_videos:/host_mnt/e/videos
+      - F_videos:/host_mnt/f/videos
+      - appdata:/code/data
+    environment:
+      - DATABASE_URL=postgresql://${LOCAL_POSTGRES_USER}:${LOCAL_POSTGRES_PASSWORD}@bnb-local-core-db:5432/${LOCAL_POSTGRES_DB}
+      - CORE_API_BASE_URL=https://bnb-core-api-app-services-production-eka6axcqetdmaqfm.centralus-01.azurewebsites.net
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility   
+    env_file:
+      - ./bnb-local-core/.env
+    depends_on:
+      - bnb-local-core-db
+      - recorder
+    runtime: nvidia
+    networks:
+      - proxy_net
+    privileged: true
+
+  bnb-local-core-db:
+    image: postgres:17-alpine
+    container_name: bnb-local-core-db
+    ports:
+      - "5432:5432"  # Mapea el puerto 5432 del host al puerto 5432 del contenedor
+    environment:
+      POSTGRES_DB: ${LOCAL_POSTGRES_DB}
+      POSTGRES_USER: ${LOCAL_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${LOCAL_POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - proxy_net
+
+  reverse-proxy:
+    image: nginx:stable
+    container_name: reverse-proxy
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./turn_server/certs/turn_server_cert.pem:/etc/nginx/certs/turn_server_cert.pem:ro
+      - ./turn_server/certs/turn_server_pkey.pem:/etc/nginx/certs/turn_server_pkey.pem:ro
+      - ./turn_server/certs/sig_systems_cert.pem:/etc/nginx/certs/sig_systems_cert.pem:ro
+      - ./turn_server/certs/sig_systems_key.pem:/etc/nginx/certs/sig_systems_key.pem:ro
+    ports:
+      - "8888:8888"
+    depends_on:
+      - bnb-local-core-web
+    networks:
+      - proxy_net
+    extra_hosts:
+      - "host.docker.internal:host-gateway"  # Importante para acceso al host
+
+  recorder:
+    build: ./recording-service
+    container_name: recorder
+    restart: unless-stopped
+    ports:
+      - "7117:7117"
+    volumes:
+      - D_videos:/host_mnt/d/videos
+      - E_videos:/host_mnt/e/videos
+      - F_videos:/host_mnt/f/videos
+    environment:
+      - FFMPEG_BACKEND=SOFTWARE
+      - CORE_API_URL=${CORE_API_URL}
+      - SITE_ID=${SITE_ID}
+      - RECORDING_DISKS=/mnt1/videos,/mnt2/videos,/mnt3/videos
+      - MAX_DISK_USAGE_PERCENT=${MAX_DISK_USAGE_PERCENT:-85}
+    runtime: nvidia
+    networks:
+      - proxy_net  # Mantener para acceso a cámaras
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+networks:
+  proxy_net:
+    driver: bridge
+
+volumes:
+  turn_logs:
+  pgdata:
+  appdata:
+  D_videos:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/mnt1/videos"
+      o: bind
+  E_videos:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/mnt2/videos"
+      o: bind
+  F_videos:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/mnt3/videos"
+      o: bind

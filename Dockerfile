@@ -3,10 +3,16 @@ FROM python:3.11-slim
 # Instalar dependencias básicas y herramientas de compilación
 RUN apt-get update && apt-get install -y \
     wget \
+    curl \
     build-essential \
     gfortran \
     libopenblas-dev \
     liblapack-dev \
+    libssl-dev \
+    libffi-dev \
+    pkg-config \
+    libsrtp2-1 \
+    libsrtp2-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Instalar dependencias del sistema para OpenCV y streaming
@@ -45,6 +51,9 @@ COPY requirements.txt .
 
 # Upgrade pip and install build tools
 RUN pip install --upgrade pip setuptools wheel
+
+# Install PyTorch CUDA wheels before general requirements to ensure GPU support
+RUN pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cu121 torch torchvision torchaudio
 
 # Install all dependencies from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt

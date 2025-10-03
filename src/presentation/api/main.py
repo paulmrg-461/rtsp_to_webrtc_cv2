@@ -16,7 +16,7 @@ from src.core.config import settings
 from src.presentation.api.routes import camera_router, streaming_router
 from src.presentation.api.routes.camera_routes import set_camera_manager
 from src.presentation.api.routes.streaming_routes import set_webrtc_service
-from src.infrastructure.services.camera_manager import CameraManager
+from src.infrastructure.services.enhanced_camera_manager import enhanced_camera_manager
 from src.infrastructure.services.webrtc_service import WebRTCService
 
 # Configurar logging
@@ -24,7 +24,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Instancias globales
-camera_manager = CameraManager()
+camera_manager = enhanced_camera_manager  # Usar el gestor mejorado
 webrtc_service = WebRTCService()
 
 # Configurar Socket.IO
@@ -38,23 +38,35 @@ sio = socketio.AsyncServer(
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Gestión del ciclo de vida de la aplicación"""
-    logger.info("Iniciando aplicación RTSP to WebRTC...")
+    # Inicialización
+    logger.info("🚀 LIFESPAN: Iniciando ciclo de vida de FastAPI")
+    logger.info("🔄 LIFESPAN: Inicializando servicios...")
     
-    # Inicializar servicios
+    # Inicializar el gestor de cámaras
+    logger.info("📋 LIFESPAN: Inicializando camera_manager...")
     await camera_manager.initialize()
-    await webrtc_service.initialize()
+    logger.info("✅ LIFESPAN: camera_manager inicializado")
     
-    # Configurar dependencias en las rutas
+    # Inicializar el servicio WebRTC
+    logger.info("📋 LIFESPAN: Inicializando webrtc_service...")
+    await webrtc_service.initialize()
+    logger.info("✅ LIFESPAN: webrtc_service inicializado")
+    
+    # Configurar dependencias
+    logger.info("📋 LIFESPAN: Configurando dependencias...")
     webrtc_service.set_camera_manager(camera_manager)
     set_camera_manager(camera_manager)
     set_webrtc_service(webrtc_service)
     
+    logger.info("✅ LIFESPAN: Servicios inicializados correctamente")
+    
     yield
     
-    # Cleanup
-    logger.info("Cerrando aplicación...")
+    # Limpieza
+    logger.info("🔄 LIFESPAN: Cerrando servicios...")
     await camera_manager.cleanup()
     await webrtc_service.cleanup()
+    logger.info("✅ LIFESPAN: Servicios cerrados")
 
 # Crear aplicación FastAPI
 app = FastAPI(
@@ -83,6 +95,13 @@ app.include_router(cameras_api_router, prefix="/api/v2")
 
 # Montar archivos estáticos
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Ruta raíz que sirve el index.html
+@app.get("/")
+async def serve_index():
+    """Servir la página principal"""
+    from fastapi.responses import FileResponse
+    return FileResponse("static/index.html")
 
 # Eventos Socket.IO
 @sio.event
@@ -161,9 +180,9 @@ async def get_camera_list(sid, data):
         await sio.emit('error', {'message': str(e)}, room=sid)
 
 # Endpoints básicos
-@app.get("/")
-async def root():
-    """Endpoint raíz"""
+@app.get("/api")
+async def api_root():
+    """Endpoint raíz de la API"""
     return {
         "message": "RTSP to WebRTC API",
         "version": "1.0.0",

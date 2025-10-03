@@ -160,6 +160,7 @@
             <button id="disconnectBtn" onclick="disconnect()" disabled>Desconectar</button>
             <button onclick="refreshCameras()">Actualizar Cámaras</button>
             <button onclick="clearLogs()">Limpiar Logs</button>
+            <li><a href="/static/webrtc_client.html" target="_blank">Cliente WebRTC de pruebas (WebCam y RTSP)</a></li>
         </div>
         
         <div class="video-container">
@@ -181,7 +182,7 @@
         </div>
     </div>
 
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script>
         let socket;
         let peerConnection;
@@ -223,8 +224,15 @@
         // Cargar cámaras disponibles
         async function loadCameras() {
             try {
+                log('Cargando cámaras disponibles...', 'info');
                 const response = await fetch('/api/cameras/');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
                 const cameras = await response.json();
+                log(`${cameras.length} cámaras cargadas`, 'success');
                 
                 const select = document.getElementById('cameraSelect');
                 select.innerHTML = '<option value="">Seleccionar cámara...</option>';
@@ -232,13 +240,15 @@
                 cameras.forEach(camera => {
                     const option = document.createElement('option');
                     option.value = camera.id;
-                    option.textContent = `${camera.name} (${camera.id})`;
+                    option.textContent = `${camera.name} (${camera.enabled ? 'Habilitada' : 'Deshabilitada'})`;
                     select.appendChild(option);
                 });
                 
-                log(`${cameras.length} cámaras cargadas`, 'info');
+                return cameras;
+                
             } catch (error) {
                 log(`Error cargando cámaras: ${error.message}`, 'error');
+                return [];
             }
         }
         

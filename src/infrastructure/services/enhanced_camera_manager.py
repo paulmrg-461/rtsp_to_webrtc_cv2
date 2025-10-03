@@ -34,12 +34,75 @@ class EnhancedCameraManager:
         self.existing_manager = ExistingCameraManager()
         
     async def initialize(self):
-        """Inicializar el gestor"""
+        """Inicializar el gestor mejorado"""
+        logger.info("🚀 INICIANDO EnhancedCameraManager...")
+        
+        # Inicializar el gestor existente
+        logger.info("🔄 Inicializando gestor existente...")
+        await self.existing_manager.initialize()
+        logger.info("✅ Gestor existente inicializado")
+        
+        # Cargar cámaras desde la configuración
+        logger.info("🔄 Cargando cámaras desde configuración...")
+        await self._load_cameras_from_config()
+        logger.info(f"📊 Total de cámaras cargadas: {len(self.cameras)}")
+        
+        logger.info("✅ EnhancedCameraManager inicializado correctamente")
+    
+    async def _load_cameras_from_config(self):
+        """Cargar cámaras desde la configuración de settings"""
         try:
-            await self.existing_manager.initialize()
-            logger.info("EnhancedCameraManager inicializado correctamente")
+            from src.core.config import settings
+            
+            logger.info("🔄 Cargando cámaras desde configuración...")
+            logger.info(f"📋 Configuración de cámaras RTSP: {settings.rtsp_cameras}")
+            
+            for camera_id, camera_config in settings.rtsp_cameras.items():
+                logger.info(f"🔍 Procesando cámara {camera_id}: {camera_config}")
+                
+                # Solo procesar cámaras habilitadas
+                if not camera_config.get("enabled", True):
+                    logger.info(f"⏭️ Cámara {camera_id} está deshabilitada, omitiendo...")
+                    continue
+                
+                try:
+                    # Crear configuración de cámara - CORREGIR: usar rtsp_url en lugar de url
+                    config = CameraConfig(
+                        id=camera_id,
+                        name=camera_config.get("name", f"Cámara {camera_id}"),
+                        rtsp_url=camera_config.get("url"),  # Mapear 'url' a 'rtsp_url'
+                        type=CameraType.RTSP,
+                        status=CameraStatus.INACTIVE,
+                        location=camera_config.get("location", ""),
+                        description=camera_config.get("description", ""),
+                        resolution=camera_config.get("resolution", "640x480"),
+                        fps=camera_config.get("fps", 30),
+                        enabled=camera_config.get("enabled", True),
+                        created_at=datetime.now(),
+                        updated_at=datetime.now(),
+                        metadata={}
+                    )
+                    
+                    # Agregar la cámara al diccionario
+                    self.cameras[camera_id] = config
+                    logger.info(f"✅ Cámara {camera_id} cargada exitosamente")
+                    
+                    # Intentar conectar si está habilitada
+                    if config.enabled:
+                        await self._test_camera_connection(camera_id)
+                    
+                except Exception as e:
+                    logger.error(f"❌ Error cargando cámara {camera_id}: {str(e)}")
+            
+            logger.info(f"🎯 Cargadas {len(self.cameras)} cámaras desde configuración")
+            logger.info(f"📹 Cámaras disponibles: {list(self.cameras.keys())}")
+            
+            # Log adicional para debug
+            if len(self.cameras) == 0:
+                logger.warning("⚠️ NO SE CARGÓ NINGUNA CÁMARA - Verificar configuración")
+                
         except Exception as e:
-            logger.error(f"Error inicializando EnhancedCameraManager: {str(e)}")
+            logger.error(f"❌ Error cargando cámaras desde configuración: {str(e)}")
             raise
         
     async def add_camera(self, camera_config: CameraConfig) -> CameraResponse:
@@ -52,8 +115,8 @@ class EnhancedCameraManager:
                 
                 # Verificar si ya existe una cámara con la misma URL
                 for existing_camera in self.cameras.values():
-                    if existing_camera.url == camera_config.url:
-                        raise ValueError(f"Ya existe una cámara con la URL {camera_config.url}")
+                    if existing_camera.rtsp_url == camera_config.rtsp_url:
+                        raise ValueError(f"Ya existe una cámara con la URL {camera_config.rtsp_url}")
                 
                 # Agregar la cámara
                 camera_config.updated_at = datetime.now()
@@ -144,6 +207,33 @@ class EnhancedCameraManager:
             inactive=inactive
         )
     
+    async def get_cameras(self) -> List[Dict[str, Any]]:
+        """Obtener lista de cámaras (compatibilidad con rutas existentes)"""
+        cameras = []
+        for camera in self.cameras.values():
+            cameras.append({
+                "id": camera.id,
+                "name": camera.name,
+                "enabled": camera.enabled,
+                "streaming": False,  # Por ahora siempre False
+                "width": int(camera.resolution.split('x')[0]) if 'x' in camera.resolution else 640,
+                "height": int(camera.resolution.split('x')[1]) if 'x' in camera.resolution else 480,
+                "fps": camera.fps
+            })
+        return cameras
+    
+    def is_streaming(self, camera_id: str) -> bool:
+        """Verificar si una cámara está streaming (compatibilidad con Socket.IO)"""
+        return camera_id in self.active_streams
+    
+    async def start_stream(self, camera_id: str, socketio_instance=None):
+        """Iniciar stream de una cámara (compatibilidad con rutas existentes)"""
+        return await self.start_existing_stream(camera_id, socketio_instance)
+    
+    async def stop_stream(self, camera_id: str):
+        """Detener stream de una cámara (compatibilidad con rutas existentes)"""
+        return await self.stop_existing_stream(camera_id)
+    
     async def get_camera_stream(self, camera_id: str) -> Optional[cv2.VideoCapture]:
         """Obtener stream de una cámara"""
         if camera_id not in self.cameras:
@@ -205,7 +295,7 @@ class EnhancedCameraManager:
             success = await loop.run_in_executor(
                 self.executor, 
                 self._test_connection_sync, 
-                camera.url
+                camera.rtsp_url
             )
             
             camera.status = CameraStatus.ACTIVE if success else CameraStatus.ERROR
@@ -240,7 +330,7 @@ class EnhancedCameraManager:
             cap = await loop.run_in_executor(
                 self.executor,
                 cv2.VideoCapture,
-                camera.url
+                camera.rtsp_url
             )
             
             if cap.isOpened():
@@ -273,7 +363,7 @@ class EnhancedCameraManager:
         return CameraResponse(
             id=camera.id,
             name=camera.name,
-            url=camera.url,
+            url=camera.rtsp_url,
             type=camera.type,
             status=camera.status,
             location=camera.location,
@@ -295,7 +385,7 @@ class EnhancedCameraManager:
                 existing_config = {
                     'id': camera.id,
                     'name': camera.name,
-                    'rtsp_url': camera.url,
+                    'rtsp_url': camera.rtsp_url,
                     'enabled': camera.enabled
                 }
                 

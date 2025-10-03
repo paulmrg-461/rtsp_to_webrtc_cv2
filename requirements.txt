@@ -4,11 +4,10 @@ uvicorn[standard]==0.24.0
 python-multipart==0.0.6
 
 # Machine Learning & Computer Vision
-# PyTorch nightly with CUDA 12.8 support for RTX 5070 (sm_120)
-# Install with: pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu128
-torch
-torchvision
-torchaudio
+# PyTorch with compatible versions
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
 # Install ultralytics after PyTorch to avoid version conflicts
 ultralytics
 opencv-python==4.8.1.78
@@ -36,9 +35,10 @@ python-dotenv==1.0.0
 loguru==0.7.2
 
 # WebRTC & Streaming
-aiortc==1.6.0
+aiortc==1.13.0
 python-socketio==5.10.0
 websockets==12.0
+av==14.0.1
 
 # Async & Concurrency
 aiofiles==23.2.1
@@ -47,7 +47,7 @@ aiohttp==3.9.1
 
 # Utilities
 tqdm==4.66.1
-typing-extensions==4.8.0
+typing-extensions>=4.10.0
 
 # Development & Testing
 pytest==7.4.3

@@ -58,20 +58,62 @@ class RTSPCameraStream:
     async def initialize(self):
         """Inicializar la cámara y el detector de movimiento"""
         try:
-            logger.info(f"Inicializando cámara {self.config.id}: {self.config.name}")
+            logger.info(f"🔧 Inicializando cámara {self.config.id}: {self.config.name}")
+            logger.info(f"🌐 URL: {self.config.rtsp_url}")
             
-            # Configurar captura de video
-            self.cap = cv2.VideoCapture(self.config.rtsp_url)
+            # Crear captura de video con configuración optimizada
+            self.cap = cv2.VideoCapture()
             
-            # Configurar propiedades de la cámara
+            # Configurar backend específico según el tipo de URL
+            if self.config.rtsp_url.startswith('rtsp://'):
+                # Para streams RTSP, usar FFmpeg
+                logger.info(f"🎬 Usando backend FFmpeg para RTSP: {self.config.rtsp_url}")
+                self.cap.open(self.config.rtsp_url, cv2.CAP_FFMPEG)
+            elif self.config.rtsp_url.isdigit():
+                # Para dispositivos locales, usar V4L2 en Linux
+                device_id = int(self.config.rtsp_url)
+                logger.info(f"📹 Usando backend V4L2 para dispositivo local: {device_id}")
+                self.cap.open(device_id, cv2.CAP_V4L2)
+            elif self.config.rtsp_url.startswith('/dev/video'):
+                # Para dispositivos de video específicos
+                logger.info(f"📹 Usando backend V4L2 para dispositivo: {self.config.rtsp_url}")
+                self.cap.open(self.config.rtsp_url, cv2.CAP_V4L2)
+            else:
+                # Fallback a backend por defecto
+                logger.info(f"🔄 Usando backend por defecto para: {self.config.rtsp_url}")
+                self.cap.open(self.config.rtsp_url)
+            
+            # Configurar propiedades optimizadas para RTSP
             self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.config.width)
             self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.config.height)
             self.cap.set(cv2.CAP_PROP_FPS, self.config.fps)
-            self.cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)  # Reducir buffer para menor latencia
+            
+            # Configuración optimizada de buffer para RTSP
+            self.cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)  # Buffer mínimo para baja latencia
+            
+            # Configuraciones adicionales para FFmpeg backend
+            if hasattr(cv2, 'CAP_PROP_FOURCC'):
+                # Forzar codec H.264 si está disponible
+                self.cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc('H', '2', '6', '4'))
+            
+            # Configurar timeout para conexiones RTSP
+            if hasattr(cv2, 'CAP_PROP_OPEN_TIMEOUT_MSEC'):
+                self.cap.set(cv2.CAP_PROP_OPEN_TIMEOUT_MSEC, 30000)  # 30 segundos timeout
+            
+            if hasattr(cv2, 'CAP_PROP_READ_TIMEOUT_MSEC'):
+                self.cap.set(cv2.CAP_PROP_READ_TIMEOUT_MSEC, 5000)   # 5 segundos read timeout
             
             # Verificar conexión
+            logger.info(f"🔍 Verificando conexión para cámara {self.config.id}...")
             if not self.cap.isOpened():
                 raise Exception(f"No se pudo conectar a la cámara: {self.config.rtsp_url}")
+            
+            # Intentar leer un frame para verificar que funciona
+            ret, frame = self.cap.read()
+            if not ret or frame is None:
+                raise Exception(f"No se pudo leer frame de la cámara: {self.config.rtsp_url}")
+            
+            logger.info(f"📏 Frame leído exitosamente: {frame.shape}")
             
             # Inicializar detector de movimiento
             self.background_subtractor = cv2.createBackgroundSubtractorMOG2(
@@ -80,11 +122,12 @@ class RTSPCameraStream:
                 history=500
             )
             
-            logger.info(f"Cámara {self.config.id} inicializada correctamente")
+            logger.info(f"✅ Cámara {self.config.id} inicializada correctamente")
             return True
             
         except Exception as e:
-            logger.error(f"Error inicializando cámara {self.config.id}: {e}")
+            logger.error(f"❌ Error inicializando cámara {self.config.id}: {e}")
+            logger.error(f"🔧 Detalles del error: {type(e).__name__}")
             return False
     
     def start_stream(self):
@@ -105,17 +148,41 @@ class RTSPCameraStream:
         logger.info(f"Stream detenido para cámara {self.config.id}")
     
     def _capture_loop(self):
-        """Loop principal de captura de video"""
+        """Loop principal de captura de video optimizado para RTSP"""
         frame_time = 1.0 / self.config.fps
+        consecutive_failures = 0
+        max_failures = 10
         
         while self.is_running and self.cap and self.cap.isOpened():
             start_time = time.time()
             
             try:
-                ret, frame = self.cap.read()
+                # Limpiar buffer para obtener el frame más reciente (reduce latencia)
+                # Esto es especialmente importante para streams RTSP en tiempo real
+                buffer_size = int(self.cap.get(cv2.CAP_PROP_BUFFERSIZE))
+                for _ in range(buffer_size):
+                    self.cap.grab()
+                
+                ret, frame = self.cap.retrieve()
                 if not ret:
-                    logger.warning(f"No se pudo leer frame de cámara {self.config.id}")
+                    consecutive_failures += 1
+                    logger.warning(f"No se pudo leer frame de cámara {self.config.id} (fallos consecutivos: {consecutive_failures})")
+                    
+                    if consecutive_failures >= max_failures:
+                        logger.error(f"Demasiados fallos consecutivos en cámara {self.config.id}, intentando reconectar...")
+                        # Ejecutar reconexión en un hilo separado para no bloquear
+                        threading.Thread(target=self._sync_reconnect, daemon=True).start()
+                        consecutive_failures = 0
+                    
                     time.sleep(0.1)
+                    continue
+                
+                # Reset contador de fallos en lectura exitosa
+                consecutive_failures = 0
+                
+                # Verificar calidad del frame
+                if frame is None or frame.size == 0:
+                    logger.warning(f"Frame vacío o corrupto de cámara {self.config.id}")
                     continue
                 
                 # Procesar detección de movimiento
@@ -128,15 +195,58 @@ class RTSPCameraStream:
                 # Notificar a suscriptores
                 self._notify_subscribers(motion_frame)
                 
-                # Control de FPS
+                # Control de FPS adaptativo
                 elapsed = time.time() - start_time
                 sleep_time = max(0, frame_time - elapsed)
                 if sleep_time > 0:
                     time.sleep(sleep_time)
                     
             except Exception as e:
+                consecutive_failures += 1
                 logger.error(f"Error en loop de captura para cámara {self.config.id}: {e}")
+                
+                if consecutive_failures >= max_failures:
+                    logger.error(f"Demasiados errores consecutivos en cámara {self.config.id}, intentando reconectar...")
+                    # Ejecutar reconexión en un hilo separado para no bloquear
+                    threading.Thread(target=self._sync_reconnect, daemon=True).start()
+                    consecutive_failures = 0
+                
                 time.sleep(1)
+    
+    def _sync_reconnect(self):
+        """Wrapper síncrono para la reconexión asíncrona"""
+        try:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            loop.run_until_complete(self._reconnect())
+        except Exception as e:
+            logger.error(f"Error en reconexión síncrona para cámara {self.config.id}: {e}")
+        finally:
+            loop.close()
+    
+    async def _reconnect(self):
+        """Reconectar la cámara RTSP en caso de fallos"""
+        try:
+            logger.info(f"Intentando reconectar cámara {self.config.id}...")
+            
+            # Cerrar conexión actual
+            if self.cap:
+                self.cap.release()
+                self.cap = None
+            
+            # Esperar antes de reconectar
+            await asyncio.sleep(2)
+            
+            # Reinicializar la conexión
+            await self.initialize()
+            
+            if self.cap and self.cap.isOpened():
+                logger.info(f"Reconexión exitosa para cámara {self.config.id}")
+            else:
+                logger.error(f"Falló la reconexión para cámara {self.config.id}")
+                
+        except Exception as e:
+            logger.error(f"Error durante reconexión de cámara {self.config.id}: {e}")
     
     def _process_motion_detection(self, frame: np.ndarray) -> MotionFrame:
         """Procesar detección de movimiento en el frame"""
@@ -256,21 +366,44 @@ class CameraManager:
         
     async def initialize(self):
         """Inicializar el gestor de cámaras"""
-        logger.info("Inicializando gestor de cámaras...")
+        logger.info("🔄 INICIANDO GESTOR DE CÁMARAS...")
+        logger.info(f"📋 Configuración de cámaras RTSP: {settings.rtsp_cameras}")
         
         # Cargar configuración de cámaras
-        for camera_config in settings.default_cameras:
-            config = CameraConfig(**camera_config)
+        for camera_id, camera_config in settings.rtsp_cameras.items():
+            logger.info(f"🔍 Procesando cámara {camera_id}: {camera_config}")
+            
+            # Solo procesar cámaras habilitadas
+            if not camera_config.get("enabled", True):
+                logger.info(f"⏭️ Cámara {camera_id} está deshabilitada, omitiendo...")
+                continue
+            
+            # Mapear los campos de configuración a los esperados por CameraConfig
+            config_data = {
+                "id": camera_id,
+                "name": camera_config.get("name", f"Cámara {camera_id}"),
+                "rtsp_url": camera_config.get("url"),  # Mapear 'url' a 'rtsp_url'
+                "enabled": camera_config.get("enabled", True)
+            }
+            logger.info(f"📝 Datos de configuración mapeados: {config_data}")
+            
+            config = CameraConfig(**config_data)
             camera_stream = RTSPCameraStream(config)
             
             # Inicializar cámara
+            logger.info(f"🚀 Intentando inicializar cámara {config.id}...")
             if await camera_stream.initialize():
                 self.cameras[config.id] = camera_stream
-                logger.info(f"Cámara {config.id} agregada al gestor")
+                logger.info(f"✅ Cámara {config.id} agregada al gestor exitosamente")
             else:
-                logger.error(f"No se pudo inicializar cámara {config.id}")
+                logger.error(f"❌ No se pudo inicializar cámara {config.id}")
         
-        logger.info(f"Gestor de cámaras inicializado con {len(self.cameras)} cámaras")
+        logger.info(f"🎯 Gestor de cámaras inicializado con {len(self.cameras)} cámaras")
+        logger.info(f"📹 Cámaras disponibles: {list(self.cameras.keys())}")
+        
+        # Log adicional para debug
+        if len(self.cameras) == 0:
+            logger.warning("⚠️ NO SE INICIALIZÓ NINGUNA CÁMARA - Verificar configuración y conectividad")
     
     async def start_stream(self, camera_id: str, socketio_instance=None):
         """Iniciar stream de una cámara"""

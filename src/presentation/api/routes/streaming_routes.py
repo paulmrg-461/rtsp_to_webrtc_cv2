@@ -169,3 +169,15 @@ async def streaming_health_check(ws: WebRTCService = Depends(get_webrtc_service)
     except Exception as e:
         logger.error(f"Error en health check de streaming: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/webrtc/config")
+async def get_webrtc_config():
+    """Obtener configuración WebRTC (ICE servers) para el cliente"""
+    try:
+        from src.core.config import settings
+        return {
+            "iceServers": settings.webrtc_ice_servers,
+        }
+    except Exception as e:
+        logger.error(f"Error obteniendo configuración WebRTC: {e}")
+        raise HTTPException(status_code=500, detail=str(e))

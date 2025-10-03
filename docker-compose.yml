@@ -16,6 +16,10 @@ services:
       - ./src:/app/src
       - ./static:/app/static
       - ./.env:/app/.env
+    # devices:
+    #   - /dev/video0:/dev/video0  # Mapear dispositivo de cámara (Linux)
+    #   - /dev/video1:/dev/video1  # Mapear dispositivos adicionales si existen (Linux)
+    # Nota: En Windows/WSL2 el acceso a webcam se hace desde el navegador con getUserMedia; el contenedor no necesita /dev/video*
     env_file:
       - .env
     environment:
@@ -24,11 +28,16 @@ services:
       - APP_HOST=0.0.0.0
       - APP_PORT=8990
       - TZ=America/Bogota
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
+      - USE_GPU=true
+    gpus: all
     restart: unless-stopped
+    privileged: true  # Necesario para acceso a dispositivos de hardware
     networks:
       - rtsp-network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8990/health"]
+      test: ["CMD-SHELL", "python -c \"import sys,urllib.request,json; resp=urllib.request.urlopen('http://localhost:8990/health'); data=json.load(resp); sys.exit(0 if data.get('status')=='healthy' else 1)\""]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -61,6 +70,7 @@ services:
   #   volumes:
   #     - redis_data:/data
 
+# Configuración de red
 networks:
   rtsp-network:
     driver: bridge
